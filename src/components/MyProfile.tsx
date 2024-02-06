@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   Flex,
@@ -6,15 +7,16 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import bgProfile from "../assets/background-profile.jpg";
 import React from "react";
 
 const MyProfile: React.FC = () => {
   const boxBg = useColorModeValue("white !important", "#111c44 !important");
   const mainText = useColorModeValue("gray.800", "white");
-  const secondaryText = useColorModeValue("gray.400", "gray.400");
+  
 
   return (
-    <Card m={4}>
+    <Card mx={4} my={2}>
       <Flex
         borderRadius="20px"
         bg={boxBg}
@@ -26,11 +28,7 @@ const MyProfile: React.FC = () => {
         <Text my={1} fontSize={18} fontWeight="bold">
           My Profile
         </Text>
-        <Image
-          src="https://i.ibb.co/xmP2pS6/Profile.png"
-          maxW="100%"
-          borderRadius="20px"
-        />
+        <Image src={bgProfile} maxW="100%" borderRadius="20px" />
         <Flex w="full">
           <Flex flexDirection="column" mb="30px" w="full" px={4}>
             <Image
@@ -42,39 +40,40 @@ const MyProfile: React.FC = () => {
               mt="-38px"
               borderRadius="50%"
             />
-            <Text fontWeight="600" color={mainText} fontSize="xl">
-              ✨Adela Parkson✨
-            </Text>
-            <Text color={secondaryText} fontSize="sm" fontWeight="500">
-              @adelapark
-            </Text>
-            <Text fontSize="13px">picked over by the worm</Text>
-            <Flex gap={4}>
-              <Flex alignItems="center" gap="2px">
-                <Text fontWeight="bold">291</Text>
-                <Text fontSize="14px">Following</Text>
-              </Flex>
-
-              <Flex alignItems="center" gap="2px">
-                <Text fontWeight="bold">23</Text>
-                <Text fontSize="14px" color={mainText}>
-                  Follower
-                </Text>
-              </Flex>
-            </Flex>
           </Flex>
+
           <Button
             fontSize="13px"
             fontWeight="bold"
             bg="transparent"
             border="1px"
-            my="3px"
+            my="5px"
             h="30px"
             rounded="16px"
           >
             Edit Profile
           </Button>
         </Flex>
+        <Box mt={-7} mb={5}>
+          <Text fontWeight="600" color={mainText} fontSize="xl">
+            ✨Adela Parkson✨
+          </Text>
+          <Text color="gray">@adelapark</Text>
+          <Text fontSize="13px">picked over by the worm</Text>
+          <Flex gap={4} alignItems="center">
+            <Flex alignItems="center" gap="2px">
+              <Text fontWeight="bold">291</Text>
+              <Text fontSize="14px">Following</Text>
+            </Flex>
+
+            <Flex alignItems="center" gap="2px">
+              <Text fontWeight="bold">23</Text>
+              <Text fontSize="14px" color={mainText}>
+                Follower
+              </Text>
+            </Flex>
+          </Flex>
+        </Box>
       </Flex>
     </Card>
   );

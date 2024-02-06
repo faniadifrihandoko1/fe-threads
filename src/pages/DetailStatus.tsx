@@ -1,12 +1,13 @@
 import { Box, Flex } from "@chakra-ui/react";
-import Cards from "../components/Cards";
-import CreatePost from "../components/CreatePost";
+import React from "react";
 import Sidebar from "../components/Sidebar";
+
 import MyProfile from "../components/MyProfile";
 import CardFollow from "../components/CardFollow";
 import Footer from "../components/Footer";
+import StatusDetail from "../components/StatusDetail";
 
-export default function Home() {
+const DetailStatus: React.FC = () => {
   return (
     <Flex w="full">
       <Box w="20%" display={{ base: "none", md: "block" }}>
@@ -17,8 +18,7 @@ export default function Home() {
         px={{ base: "10px", md: "0px" }}
         py={2}
       >
-        <CreatePost />
-        <Cards />
+        <StatusDetail />
         <Box display={{ base: "block", md: "none" }} bottom={0}>
           <Sidebar />
         </Box>
@@ -30,4 +30,6 @@ export default function Home() {
       </Box>
     </Flex>
   );
-}
+};
+
+export default DetailStatus;

@@ -17,56 +17,77 @@ import logo from "../assets/logo.svg";
 export default function Sidebar() {
   return (
     <Flex
-      direction="column"
-      height="100vh"
+      direction={{ base: "row", md: "column" }}
+      height={{ base: "", md: "100vh" }}
       py="15"
       borderRight={2}
       borderEnd="black"
-      position="fixed"
+      position={{ base: "relative", md: "fixed" }}
+      w={{ base: "", md: "20%" }}
     >
       <Box px="30px" w="full">
-        <Flex>
-          <Heading color="green" my={2}>
-            Circle
-          </Heading>
-          <Image w="35px" ml={1} mt={2} src={logo}></Image>
+        <Flex
+          direction={{ base: "row", md: "column" }}
+          justifyContent="space-around"
+        >
+          <Flex display={{ base: "none", md: "flex" }} ml={4}>
+            <Heading color="green" my={2}>
+              Circle
+            </Heading>
+            <Image w="35px" ml={1} mt={2} src={logo} />
+          </Flex>
+
+          <Box mt="20px">
+            <Button alignItems="center" gap="3" bg="transparent">
+              <RiHome7Fill size={25} />
+              <Text fontWeight="bold" display={{ base: "none", md: "block" }}>
+                Home
+              </Text>
+            </Button>
+          </Box>
+          <Box mt="20px">
+            <Button alignItems="center" gap="3" bg="transparent">
+              <MdPersonSearch size={25} />
+              <Text fontWeight="bold" display={{ base: "none", md: "block" }}>
+                Search
+              </Text>
+            </Button>
+          </Box>
+          <Box mt="20px">
+            <Button alignItems="center" gap="3" bg="transparent">
+              <FaRegHeart size={25} />
+              <Text fontWeight="bold" display={{ base: "none", md: "block" }}>
+                Follows
+              </Text>
+            </Button>
+          </Box>
+          <Box mt="20px">
+            <Button alignItems="center" gap="3" bg="transparent">
+              <CgProfile size={25} />
+              <Text fontWeight="bold" display={{ base: "none", md: "block" }}>
+                Profile
+              </Text>
+            </Button>
+          </Box>
+
+          <Button
+            bg="green"
+            mt="20px"
+            w="full"
+            rounded={20}
+            textColor="white"
+            display={{ base: "none", md: "block" }}
+          >
+            Create Post
+          </Button>
         </Flex>
-
-        <Box mt="20px">
-          <Flex alignItems="center" gap="3">
-            <RiHome7Fill size={25} />
-            <Text fontWeight="bold">Home</Text>
-          </Flex>
-        </Box>
-        <Box mt="20px">
-          <Flex alignItems="center" gap="3">
-            <MdPersonSearch size={25} />
-            <Text fontWeight="bold">Search</Text>
-          </Flex>
-        </Box>
-        <Box mt="20px">
-          <Flex alignItems="center" gap="3">
-            <FaRegHeart size={25} />
-            <Text fontWeight="bold">Follows</Text>
-          </Flex>
-        </Box>
-        <Box mt="20px">
-          <Flex alignItems="center" gap="3">
-            <CgProfile size={25} />
-            <Text fontWeight="bold">Profile</Text>
-          </Flex>
-        </Box>
-
-        <Button bg="green" mt="20px" w="full" rounded={20} textColor="white">
-          Create Post
-        </Button>
       </Box>
       <Spacer />
-      <Box px="30px">
-        <Flex alignItems="center" mt="10px" gap="3">
+      <Box px="30px" display={{ base: "none", md: "block" }}>
+        <Button alignItems="center" mt="10px" gap="3" bg="transparent">
           <TbLogout2 size={25} />
           <Text fontWeight="bold">Logout</Text>
-        </Flex>
+        </Button>
       </Box>
     </Flex>
   );
