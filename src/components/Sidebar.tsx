@@ -1,9 +1,18 @@
-import { Box, Button, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import { RiHome7Fill } from "react-icons/ri";
 import { MdPersonSearch } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { TbLogout2 } from "react-icons/tb";
+import logo from "../assets/logo.svg";
 
 export default function Sidebar() {
   return (
@@ -15,10 +24,14 @@ export default function Sidebar() {
       borderEnd="black"
       position="fixed"
     >
-      <Box bg="white" px="30px">
-        <Heading color="green" my={2}>
-          Circle X
-        </Heading>
+      <Box px="30px" w="full">
+        <Flex>
+          <Heading color="green" my={2}>
+            Circle
+          </Heading>
+          <Image w="35px" ml={1} mt={2} src={logo}></Image>
+        </Flex>
+
         <Box mt="20px">
           <Flex alignItems="center" gap="3">
             <RiHome7Fill size={25} />
