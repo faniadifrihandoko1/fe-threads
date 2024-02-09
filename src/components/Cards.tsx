@@ -18,6 +18,7 @@ export default function Cards() {
               date={item.date}
               desc={item.desc}
               like={item.like}
+              image={item.image}
               comment={item.comment}
             />
           )

@@ -13,7 +13,6 @@ import React from "react";
 const MyProfile: React.FC = () => {
   const boxBg = useColorModeValue("white !important", "#111c44 !important");
   const mainText = useColorModeValue("gray.800", "white");
-  
 
   return (
     <Card mx={4} my={2}>
@@ -28,7 +27,7 @@ const MyProfile: React.FC = () => {
         <Text my={1} fontSize={18} fontWeight="bold">
           My Profile
         </Text>
-        <Image src={bgProfile} maxW="100%" borderRadius="20px" />
+        <Image src={bgProfile} maxW="100%" h={"100px"} borderRadius="20px" />
         <Flex w="full">
           <Flex flexDirection="column" mb="30px" w="full" px={4}>
             <Image
@@ -56,18 +55,22 @@ const MyProfile: React.FC = () => {
         </Flex>
         <Box mt={-7} mb={5}>
           <Text fontWeight="600" color={mainText} fontSize="xl">
-            ✨Adela Parkson✨
+            Adela Parkson✨
           </Text>
           <Text color="gray">@adelapark</Text>
           <Text fontSize="13px">picked over by the worm</Text>
           <Flex gap={4} alignItems="center">
             <Flex alignItems="center" gap="2px">
-              <Text fontWeight="bold">291</Text>
+              <Text fontWeight="bold" fontSize={"15px"}>
+                291
+              </Text>
               <Text fontSize="14px">Following</Text>
             </Flex>
 
             <Flex alignItems="center" gap="2px">
-              <Text fontWeight="bold">23</Text>
+              <Text fontWeight="bold" fontSize={"15px"}>
+                23
+              </Text>
               <Text fontSize="14px" color={mainText}>
                 Follower
               </Text>

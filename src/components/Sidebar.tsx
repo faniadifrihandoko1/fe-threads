@@ -17,13 +17,16 @@ import logo from "../assets/logo.svg";
 export default function Sidebar() {
   return (
     <Flex
+      borderRadius={"1%"}
+      my={2}
       direction={{ base: "row", md: "column" }}
       height={{ base: "", md: "100vh" }}
+      bg={"white"}
       py="15"
       borderRight={2}
       borderEnd="black"
       position={{ base: "relative", md: "fixed" }}
-      w={{ base: "", md: "20%" }}
+      w={{ base: "", md: "19%" }}
     >
       <Box px="30px" w="full">
         <Flex
@@ -34,37 +37,49 @@ export default function Sidebar() {
             <Heading color="green" my={2}>
               Circle
             </Heading>
-            <Image w="35px" ml={1} mt={2} src={logo} />
+            <Image w="40px" ml={1} mt={2} src={logo} />
           </Flex>
 
-          <Box mt="20px">
+          <Box mt="10px">
             <Button alignItems="center" gap="3" bg="transparent">
               <RiHome7Fill size={25} />
-              <Text fontWeight="bold" display={{ base: "none", md: "block" }}>
+              <Text
+                fontWeight="semibold"
+                display={{ base: "none", md: "block" }}
+              >
                 Home
               </Text>
             </Button>
           </Box>
-          <Box mt="20px">
+          <Box mt="10px">
             <Button alignItems="center" gap="3" bg="transparent">
               <MdPersonSearch size={25} />
-              <Text fontWeight="bold" display={{ base: "none", md: "block" }}>
+              <Text
+                fontWeight="semibold"
+                display={{ base: "none", md: "block" }}
+              >
                 Search
               </Text>
             </Button>
           </Box>
-          <Box mt="20px">
+          <Box mt="10px">
             <Button alignItems="center" gap="3" bg="transparent">
               <FaRegHeart size={25} />
-              <Text fontWeight="bold" display={{ base: "none", md: "block" }}>
+              <Text
+                fontWeight="semibold"
+                display={{ base: "none", md: "block" }}
+              >
                 Follows
               </Text>
             </Button>
           </Box>
-          <Box mt="20px">
+          <Box mt="10px">
             <Button alignItems="center" gap="3" bg="transparent">
               <CgProfile size={25} />
-              <Text fontWeight="bold" display={{ base: "none", md: "block" }}>
+              <Text
+                fontWeight="semibold"
+                display={{ base: "none", md: "block" }}
+              >
                 Profile
               </Text>
             </Button>
@@ -86,7 +101,7 @@ export default function Sidebar() {
       <Box px="30px" display={{ base: "none", md: "block" }}>
         <Button alignItems="center" mt="10px" gap="3" bg="transparent">
           <TbLogout2 size={25} />
-          <Text fontWeight="bold">Logout</Text>
+          <Text fontWeight="semibold">Logout</Text>
         </Button>
       </Box>
     </Flex>

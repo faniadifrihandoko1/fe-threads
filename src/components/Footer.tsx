@@ -19,17 +19,10 @@ const Footer: React.FC = () => {
         <FaFacebook />
         <FaInstagram />
       </Flex>
-      <Flex alignItems="center" gap="2px" fontSize={13}>
+      <Flex alignItems="center" gap="4px" fontSize={13}>
         <Text>Powered by</Text>
-        <Image w="17px" h="10px" mt="1px" src={logo} />
+        <Image w="17px" h="10px" mt="2px" src={logo} />
         <Text>Dumbways Indoensia</Text>
-        <Icon boxSize={2} color="gray" mt="1px" viewBox="0 0 200 200">
-          <path
-            fill="currentColor"
-            d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-          />
-        </Icon>
-        <Text>#1 Bootcamp</Text>
       </Flex>
     </Card>
   );

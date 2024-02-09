@@ -21,7 +21,7 @@ const CardFollow: React.FC = () => {
           <Flex gap={2} alignItems="center">
             <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
             <Box>
-              <Text>Fani Adi Frihandoko</Text>
+              <Text>Fani</Text>
               <Text color="gray" mt={-1}>
                 @faniadifr
               </Text>
