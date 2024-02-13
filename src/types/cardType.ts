@@ -17,3 +17,11 @@ export default interface CardType {
   image: string;
   comment: Comment[];
 }
+
+export interface threadPorps {
+  content?: string;
+  created_at?: string;
+  id?: number | undefined;
+  image?: string;
+  updated_at?: string;
+}

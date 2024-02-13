@@ -19,10 +19,13 @@ import CardType from "../types/cardType";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const StatusDetail = (props: any) => {
   const { data } = props;
+  console.log(data);
   console.log(`data nih`, data);
 
   const { id } = useParams();
-  const filterData = data.filter((item: CardType) => item.id === Number(id));
+  const filterData = data.data.filter(
+    (item: CardType) => item.id === Number(id)
+  );
   console.log(`filter data`, filterData);
 
   const dataPost = filterData[0];
@@ -51,7 +54,7 @@ const StatusDetail = (props: any) => {
             </Box>
           </Flex>
           <Text mt={2} lineHeight="19px">
-            {dataPost.desc}
+            {dataPost.content}
           </Text>
           <Image src={dataPost.image}></Image>
           <Flex

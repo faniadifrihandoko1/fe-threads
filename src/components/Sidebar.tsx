@@ -13,12 +13,13 @@ import { FaRegHeart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { TbLogout2 } from "react-icons/tb";
 import logo from "../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
     <Flex
       borderRadius={"1%"}
-      my={2}
+      mt={2}
       direction={{ base: "row", md: "column" }}
       height={{ base: "", md: "100vh" }}
       bg={"white"}
@@ -101,7 +102,9 @@ export default function Sidebar() {
       <Box px="30px" display={{ base: "none", md: "block" }}>
         <Button alignItems="center" mt="10px" gap="3" bg="transparent">
           <TbLogout2 size={25} />
-          <Text fontWeight="semibold">Logout</Text>
+          <Link to={"/login"} color={"green"}>
+            Logout
+          </Link>
         </Button>
       </Box>
     </Flex>
