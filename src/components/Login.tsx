@@ -12,32 +12,38 @@ import {
 import logo from "../assets/logo.svg";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
-import { useFormik } from "formik";
-import { useFetchLogin } from "../features/auth/useFetchLogin";
-import { useState } from "react";
+
+import { useLogin } from "../features/auth/hooks/useLogin";
 
 export default function Login() {
-  const [isMessage, setIsMessage] = useState<string>();
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    onSubmit: () => {
-      // console.log(formik.values);
-      const { email, password } = formik.values;
-      console.log(formik.values);
-      mutate({ email, password });
-      console.log(isLoading);
-    },
-  });
+  const { handleChange, handleSubmit } = useLogin();
+  // // console.log(`auth`, auth);
+  // // console.log(`handleChange`, handleChange);
+  // const navigate = useNavigate();
+  // const [isMessage, setIsMessage] = useState<string>();
+  // const formik = useFormik({
+  //   initialValues: {
+  //     email: "",
+  //     password: "",
+  //   },
+  //   onSubmit: async () => {
+  //     try {
+  //       const response = await axiosInstance.post("/login", formik.values);
+  //       // console.log(response);
+  //       localStorage.setItem("token", response.data.token);
+  //       const user = jwtDecode(response.data.token);
+  //       console.log(`user`, user);
+  //       dispatch(AUTH_LOGIN(user));
+  //       if (response.data.token) {
+  //         navigate("/");
+  //       }
+  //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     } catch (error: any) {
+  //       setIsMessage(error.response.data.message);
+  //     }
+  //   },
+  // });
 
-  const { mutate, isLoading } = useFetchLogin({
-    onError: (message) => {
-      setIsMessage(message);
-      console.log(message);
-    },
-  });
   return (
     <Container
       display={"flex"}
@@ -57,34 +63,42 @@ export default function Login() {
         <Text fontWeight="bold" textAlign={"center"}>
           Login Circle Account
         </Text>
-        <form onSubmit={formik.handleSubmit}>
-          {isMessage && (
+        {/* <form
+        // onSubmit={formik.handleSubmit}
+        > */}
+          {/* {isMessage && (
             <Box>
               <Text fontSize={13} textAlign={"center"} textColor={"red"}>
                 {isMessage}
               </Text>
             </Box>
-          )}
+          )} */}
           <Flex direction={"column"} gap={2} mt={2}>
             <Input
               borderColor={"black"}
               placeholder="email"
               name="email"
-              onChange={formik.handleChange}
-              value={formik.values.email}
+              onChange={handleChange}
+              // value={formik.values.email}
             />
             <Input
               borderColor={"black"}
               placeholder="password"
               name="password"
-              onChange={formik.handleChange}
-              value={formik.values.password}
+              onChange={handleChange}
+              // value={formik.values.password}
             />
           </Flex>
           <Text textAlign={"right"} fontSize="13px" my={1}>
             Forgot password?
           </Text>
-          <Button w={"full"} type="submit" bg={"green"} textColor={"white"}>
+          <Button
+            w={"full"}
+            type="submit"
+            onClick={handleSubmit}
+            bg={"green"}
+            textColor={"white"}
+          >
             Login
           </Button>
           <Flex fontSize="13px" mt={1} gap="2px">
@@ -98,7 +112,7 @@ export default function Login() {
               Create Account
             </ChakraLink>
           </Flex>
-        </form>
+        {/* </form> */}
       </Card>
     </Container>
   );

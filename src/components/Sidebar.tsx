@@ -13,7 +13,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { TbLogout2 } from "react-icons/tb";
 import logo from "../assets/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Sidebar() {
   return (
@@ -42,15 +42,17 @@ export default function Sidebar() {
           </Flex>
 
           <Box mt="10px">
-            <Button alignItems="center" gap="3" bg="transparent">
-              <RiHome7Fill size={25} />
-              <Text
-                fontWeight="semibold"
-                display={{ base: "none", md: "block" }}
-              >
-                Home
-              </Text>
-            </Button>
+            <NavLink to={"/"}>
+              <Button alignItems="center" gap="3" bg="transparent">
+                <RiHome7Fill size={25} />
+                <Text
+                  fontWeight="semibold"
+                  display={{ base: "none", md: "block" }}
+                >
+                  Home
+                </Text>
+              </Button>
+            </NavLink>
           </Box>
           <Box mt="10px">
             <Button alignItems="center" gap="3" bg="transparent">

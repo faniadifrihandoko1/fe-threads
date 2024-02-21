@@ -6,6 +6,7 @@ import {
   Flex,
   Heading,
   Icon,
+  Image,
   Modal,
   ModalContent,
   ModalHeader,
@@ -19,34 +20,15 @@ import React from "react";
 import ModalReply from "./ModalReply";
 import { threadPorps } from "../types/cardType";
 import { Link } from "react-router-dom";
+import convertTimeToAgo from "../utils/convertTime";
 
 const CardPost: React.FC<threadPorps> = (props) => {
-  const { content, created_at, id, image } = props;
+  const { content, created_at, id, image, user } = props;
   // const [liked, setLiked] = useState<boolean>(false);
   // const [countLike, setCountLike] = useState<number>(like);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function convertTimeToAgo(timestamp: any) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const currentDate: any = new Date();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const previousDate: any = new Date(timestamp);
-
-    const timeDifference = currentDate - previousDate;
-    const seconds = Math.floor(timeDifference / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-    if (days > 0) {
-      return days + " hari yang lalu";
-    } else if (hours > 0) {
-      return hours + " jam yang lalu";
-    } else {
-      return minutes + " menit yang lalu";
-    }
-  }
 
   // const handleLike = () => {
   //   if (!liked) {
@@ -60,6 +42,7 @@ const CardPost: React.FC<threadPorps> = (props) => {
 
   // const { data } = useFetchThread();
   // console.log(data);
+  // console.log(reply?);
   return (
     <Card mt={2} p={4}>
       <Box>
@@ -68,7 +51,7 @@ const CardPost: React.FC<threadPorps> = (props) => {
             <Avatar name="Dan Abrahmov" src="https://bit.ly/sage-adebayo" />
           </Box>
           <Box>
-            <Heading fontSize={"md"}>Ini Dummy</Heading>
+            <Heading fontSize={"md"}>{user?.fullName}</Heading>
             <Flex gap={1} alignItems="center">
               <Text color="gray">@dummydong</Text>
               <Icon boxSize={1.5} color="gray" mt={1} viewBox="0 0 200 200">
@@ -78,13 +61,13 @@ const CardPost: React.FC<threadPorps> = (props) => {
                 />
               </Icon>
               <Text color="gray" fontSize="14px">
-                {convertTimeToAgo(created_at)} | {image}
+                {convertTimeToAgo(created_at)}
               </Text>
             </Flex>
             <Link to={`detail-status/${id}`}>
               <Text fontSize={15}>{content}</Text>
             </Link>
-            {/* <Image src={image}></Image> */}
+            {!!image && <Image src={image}></Image>}
             <Flex gap={2} mt={2} alignItems="center">
               <Button
                 // onClick={handleLike}

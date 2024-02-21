@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import MyProfile from "../components/MyProfile";
@@ -9,8 +9,14 @@ interface isLayoutProps {
   children: React.ReactNode;
 }
 export default function SetLayout({ children }: isLayoutProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // const token: any = localStorage.getItem("token");
+  // if (token === null) {
+  //   window.location.href = "/login";
+  // }
+
   return (
-    <Flex w="full">
+    <Box display={"flex"} w="full">
       <Box w="20%" display={{ base: "none", md: "block" }}>
         <Sidebar />
       </Box>
@@ -22,6 +28,6 @@ export default function SetLayout({ children }: isLayoutProps) {
         <CardFollow />
         <Footer />
       </Box>
-    </Flex>
+    </Box>
   );
 }

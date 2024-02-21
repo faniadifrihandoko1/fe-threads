@@ -9,10 +9,16 @@ import {
 } from "@chakra-ui/react";
 import bgProfile from "../assets/background-profile.jpg";
 import React from "react";
+import { userProps } from "../types/cardType";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/type/RootState";
+import { Link } from "react-router-dom";
 
-const MyProfile: React.FC = () => {
+const MyProfile: React.FC<userProps> = () => {
   const boxBg = useColorModeValue("white !important", "#111c44 !important");
   const mainText = useColorModeValue("gray.800", "white");
+  const user = useSelector((state: RootState) => state.auth);
+  // console.log(`my profile`, user);
 
   return (
     <Card mx={4} my={2}>
@@ -40,25 +46,26 @@ const MyProfile: React.FC = () => {
               borderRadius="50%"
             />
           </Flex>
-
-          <Button
-            fontSize="13px"
-            fontWeight="bold"
-            bg="transparent"
-            border="1px"
-            my="5px"
-            h="30px"
-            rounded="16px"
-          >
-            Edit Profile
-          </Button>
+          <Link to={`/edit-profile/${user.id}`}>
+            <Button
+              fontSize="13px"
+              fontWeight="bold"
+              bg="transparent"
+              border="1px"
+              my="5px"
+              h="30px"
+              rounded="16px"
+            >
+              Edit Profile
+            </Button>
+          </Link>
         </Flex>
         <Box mt={-7} mb={5}>
           <Text fontWeight="600" color={mainText} fontSize="xl">
-            Adela Parkson✨
+            {user.fullName}
           </Text>
-          <Text color="gray">@adelapark</Text>
-          <Text fontSize="13px">picked over by the worm</Text>
+          <Text color="gray">@{user.username}</Text>
+          <Text fontSize="13px">{user.bio}</Text>
           <Flex gap={4} alignItems="center">
             <Flex alignItems="center" gap="2px">
               <Text fontWeight="bold" fontSize={"15px"}>

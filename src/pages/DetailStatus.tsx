@@ -7,12 +7,14 @@ import CardFollow from "../components/CardFollow";
 import Footer from "../components/Footer";
 import StatusDetail from "../components/StatusDetail";
 import CreateReplyStatus from "../components/CreateReplyStatus";
-import ReplyStatus from "../components/ReplyStatus";
+
 // import data from "../utils/data";
 import { useFetchThread } from "../features/threads/useFetchThread";
+import ReplyStatus from "../components/ReplyStatus";
 
 const DetailStatus: React.FC = () => {
   const { data } = useFetchThread();
+  console.log("detailstatus", data);
   return (
     <Flex w="full">
       <Box w="20%" display={{ base: "none", md: "block" }}>

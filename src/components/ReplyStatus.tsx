@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Avatar,
   Box,
@@ -10,19 +11,31 @@ import {
 } from "@chakra-ui/react";
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FaRegHeart } from "react-icons/fa";
-import data from "../utils/data";
+// import data from "../utils/data";
 import { useParams } from "react-router-dom";
 
 import React from "react";
+import { useFetchThread } from "../features/threads/useFetchThread";
+import convertTimeToAgo from "../utils/convertTime";
 
 const ReplyStatus: React.FC = () => {
+  const { data } = useFetchThread();
   const { id } = useParams();
-  const filterData = data.filter((item) => item.id === parseInt(id!));
+  console.log(
+    `data Reply Status:`,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data?.data.filter((item: any) => item.id === 1)
+  );
+  console.log(`params id:`, id);
+  const filterData = data?.data.filter(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (item: any) => item.id === parseInt(id!)
+  );
   const dataPost = filterData[0];
-  console.log(typeof dataPost.comment);
+  // console.log(typeof dataPost.comment);
   return (
     <div>
-      {dataPost.comment.map((item) => {
+      {dataPost.reply.map((item: any) => {
         return (
           <Card mt={2} p={4}>
             <Box>
@@ -32,7 +45,7 @@ const ReplyStatus: React.FC = () => {
                 </Box>
                 <Box>
                   <Flex gap={1} alignItems="center">
-                    <Heading size="m">{item.name}</Heading>
+                    <Heading size="m">{item.user.fullName}</Heading>
                     <Text color="gray">{item.username}</Text>
                     <Icon boxSize={2} color="gray" mt={1} viewBox="0 0 200 200">
                       <path
@@ -41,10 +54,10 @@ const ReplyStatus: React.FC = () => {
                       />
                     </Icon>
                     <Text color="gray" fontSize={13} mt="1px">
-                      2h
+                      {convertTimeToAgo(item.created_at)}
                     </Text>
                   </Flex>
-                  <Text>{item.desc}</Text>
+                  <Text>{item.content}</Text>
                   <Flex gap={2}>
                     <Flex alignItems={"center"}>
                       <IconButton
@@ -52,9 +65,7 @@ const ReplyStatus: React.FC = () => {
                         icon={<FaRegHeart />}
                         bg={"transparent"}
                       />
-                      <Text color="gray" fontSize={15} mb="1px">
-                        16
-                      </Text>
+                      <Text color="gray" fontSize={15} mb="1px"></Text>
                     </Flex>
                     <Flex alignItems={"center"}>
                       <IconButton
@@ -63,9 +74,7 @@ const ReplyStatus: React.FC = () => {
                         icon={<BiMessageAltDetail />}
                         bg={"transparent"}
                       />
-                      <Text color="gray" fontSize={15} mb="1px" ms={-1}>
-                        191 Replies
-                      </Text>
+                      <Text color="gray" fontSize={15} mb="1px" ms={-1}></Text>
                     </Flex>
                   </Flex>
                 </Box>
