@@ -1,14 +1,22 @@
-import { Box, Button, Card, Divider, Flex, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Card,
+  Divider,
+  Flex,
+  FormLabel,
+  Input,
+} from "@chakra-ui/react";
 import { LuImagePlus } from "react-icons/lu";
 import React from "react";
+import useThreads from "../hooks/useThread";
 // import { useFormik } from "formik";
 // import { useMutation } from "react-query";
 // import { axiosInstance } from "../lib/axios";
 // import { useFetchThread } from "../features/threads/useFetchThread";
-import useFormikSetup from "../features/thread/formik/useFormikSetup";
 
 const CreatePost: React.FC = () => {
-  const formik = useFormikSetup();
+  const { handleChange, handleSubmit } = useThreads();
   //   const formik = useFormik({
   //     initialValues: {
   //       content: "",
@@ -44,30 +52,40 @@ const CreatePost: React.FC = () => {
   //   });
   return (
     <Card p={4}>
-      <form onSubmit={formik.handleSubmit}>
-        <Input
-          placeholder="Whats Is Happening!!"
-          h={"50px"}
-          border={"none"}
-          name="content"
-          onChange={formik.handleChange}
-          value={formik.values.content}
-          isRequired={true}
-        />
-        <Divider my={2} />
-        <Flex justify={"space-between"}>
-          <Box>
-            <Button bg="white">
-              <LuImagePlus size={25} />
-            </Button>
-          </Box>
-          <Box>
-            <Button type="submit" bg="green" textColor="white" rounded={15}>
-              Post
-            </Button>
-          </Box>
-        </Flex>
-      </form>
+      <Input
+        placeholder="Whats Is Happening!!"
+        h={"50px"}
+        border={"none"}
+        name="content"
+        onChange={handleChange}
+        isRequired={true}
+      />
+      <Divider my={2} />
+      <Flex justify={"space-between"}>
+        <Box>
+          <FormLabel htmlFor="image">
+            <LuImagePlus size={25} />
+          </FormLabel>
+          <Input
+            id="image"
+            display={"none"}
+            type="file"
+            name="image"
+            onChange={handleChange}
+          ></Input>
+        </Box>
+        <Box>
+          <Button
+            type="submit"
+            bg="green"
+            textColor="white"
+            onClick={handleSubmit}
+            rounded={15}
+          >
+            Post
+          </Button>
+        </Box>
+      </Flex>
     </Card>
   );
 };

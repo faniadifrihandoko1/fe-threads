@@ -1,4 +1,4 @@
-interface userType {
+export interface userType {
   id: number;
   username: string;
   fullName: string;
@@ -46,4 +46,3 @@ export interface userProps {
   password?: string;
   username?: string;
 }
-

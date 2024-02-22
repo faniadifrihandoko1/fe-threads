@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "./store/rootRecuder.ts";
+// import { store } from "./features/redux/store.ts";
 
 const queryClient = new QueryClient();
 const store = configureStore({
@@ -15,14 +16,14 @@ const store = configureStore({
 });
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider theme={theme}>
-          <Provider store={store}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <ChakraProvider theme={theme}>
             <App />
-          </Provider>
-        </ChakraProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
+          </ChakraProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
