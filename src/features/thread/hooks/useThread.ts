@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { axiosInstance } from "../../../lib/axios";
 import { IPostThread } from "../../../types/thread";
 import { useDispatch } from "react-redux";
-import { GET_THREAD } from "../../../store/rootRecuder";
+import { GET_THREAD, POST_THREAD } from "../../../store/rootRecuder";
 
 function useThreads() {
   const dispatch = useDispatch();
@@ -43,11 +43,14 @@ function useThreads() {
     const formData = new FormData();
     formData.append("content", data.content);
     formData.append("image", data.image as File);
-    console.log(formData);
+    console.log(`data`, data);
+    console.log(`formData`, formData);
 
     try {
       const response = await axiosInstance.post("/thread", formData);
       console.log(response);
+      dispatch(POST_THREAD(formData));
+      getThreads();
     } catch (error) {
       console.log(error);
     }

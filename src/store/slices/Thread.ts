@@ -24,14 +24,17 @@ export const threadSlice = createSlice({
           },
           reply: data.reply,
           like: data.like,
+          reply_count: data.reply_count,
+          like_count: data.like_count,
         };
       });
 
       return thread;
     },
     POST_THREAD: (state, action) => {
-      console.log(`state`, state);
-      console.log(`action`, action);
+      const { content, image } = action.payload;
+      console.log(content);
+      console.log(image);
     },
   },
 });

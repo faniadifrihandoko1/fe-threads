@@ -28,7 +28,7 @@ const DetailStatus: React.FC = () => {
         px={{ base: "10px", md: "0px" }}
         py={2}
       >
-        <StatusDetail data={data} />
+        <StatusDetail />
         <CreateReplyStatus />
         <ReplyStatus />
         <Box display={{ base: "block", md: "none" }} bottom={0}>

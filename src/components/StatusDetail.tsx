@@ -14,25 +14,20 @@ import { FaRegHeart } from "react-icons/fa";
 import { BiMessageAltDetail } from "react-icons/bi";
 // import data from "../utils/data";
 import { NavLink, useParams } from "react-router-dom";
-import CardType from "../types/cardType";
+
 import convertISOToReadableTime from "../utils/convertTimeHours";
 import convertDateFormat from "../utils/convertDate";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/type/RootState";
+import { IThread } from "../types/thread";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const StatusDetail = (props: any) => {
-  console.log(props);
-  const { data } = props;
-  console.log(data);
-  console.log(`data nih`, data);
-
+const StatusDetail = () => {
+  const data = useSelector((state: RootState) => state.thread);
   const { id } = useParams();
-  const filterData = data.data.filter(
-    (item: CardType) => item.id === Number(id)
-  );
-  console.log(`filter data`, filterData);
+  const filterData = data.filter((item: IThread) => item.id === Number(id));
 
   const dataPost = filterData[0];
-  console.log(`data post`, dataPost);
 
   return (
     <Card p={4}>
@@ -85,7 +80,7 @@ const StatusDetail = (props: any) => {
                 bg={"transparent"}
               />
               <Text color="gray" fontSize={15} mb="1px">
-                16
+                {dataPost.like_count}
               </Text>
             </Flex>
             <Flex alignItems={"center"}>
@@ -96,7 +91,7 @@ const StatusDetail = (props: any) => {
                 bg={"transparent"}
               />
               <Text color="gray" fontSize={15} mb="1px" ms={-1}>
-                {dataPost.reply.length} Replies
+                {dataPost.reply_count} Replies
               </Text>
             </Flex>
           </Flex>

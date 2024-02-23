@@ -17,25 +17,20 @@ import { useParams } from "react-router-dom";
 import React from "react";
 import { useFetchThread } from "../features/threads/useFetchThread";
 import convertTimeToAgo from "../utils/convertTime";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/type/RootState";
+import { IReply, IThread } from "../types/thread";
 
 const ReplyStatus: React.FC = () => {
-  const { data } = useFetchThread();
+  // const { data } = useFetchThread();
+  const data = useSelector((state: RootState) => state.thread);
   const { id } = useParams();
-  console.log(
-    `data Reply Status:`,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data?.data.filter((item: any) => item.id === 1)
-  );
-  console.log(`params id:`, id);
-  const filterData = data?.data.filter(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (item: any) => item.id === parseInt(id!)
-  );
+  const filterData = data.filter((item: IThread) => item.id === Number(id));
   const dataPost = filterData[0];
-  // console.log(typeof dataPost.comment);
+  console.log(`dataPost`, dataPost.reply);
   return (
     <div>
-      {dataPost.reply.map((item: any) => {
+      {dataPost.reply?.map((item: IReply) => {
         return (
           <Card mt={2} p={4}>
             <Box>

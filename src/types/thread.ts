@@ -5,8 +5,10 @@ export type IThread = {
   created_at: string;
   updated_at: string;
   user?: IUser;
-  reply?: IReply[];
+  reply?: IReply;
   like?: ILike[];
+  reply_count?: number;
+  like_count?: number;
 };
 
 export type IUser = {

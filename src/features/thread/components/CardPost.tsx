@@ -91,7 +91,7 @@ const CardPost: React.FC = () => {
                     <Flex gap={2}>
                       <FaRegHeart color="gray" size={18} />
                       <Text color="gray" fontSize={14}>
-                        12
+                        {item.like_count}
                       </Text>
                     </Flex>
                   </Button>
@@ -99,7 +99,7 @@ const CardPost: React.FC = () => {
                     <Flex gap={2}>
                       <BiMessageAltDetail color="gray" size={20} />
                       <Text color="gray" marginTop="0px" fontSize={14}>
-                        12 Replies
+                        {item.reply_count} Replies
                       </Text>
                     </Flex>
                   </Button>
