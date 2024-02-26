@@ -14,26 +14,34 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FaRegHeart } from "react-icons/fa";
+import { FaEllipsisH, FaRegHeart, FaRegTrashAlt, FaEdit } from "react-icons/fa";
 import { BiMessageAltDetail } from "react-icons/bi";
-import React from "react";
-import ModalReply from "../../../components/ModalReply";
+import React, { useEffect, useState } from "react";
+import ModalReply from "../../replyThread/component/ModalReply";
 
 import { Link } from "react-router-dom";
 import convertTimeToAgo from "../../../utils/convertTime";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IThread } from "../../../types/thread";
 import { RootState } from "../../../store/type/RootState";
 
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { getThread } from "../../../store/redux/createAsync";
+
 const CardPost: React.FC = () => {
+  const [modals, setModals] = useState<{ [key: number]: boolean }>({});
   // const { content, created_at, id, image, user } = props;
   // const [liked, setLiked] = useState<boolean>(false);
   // const [countLike, setCountLike] = useState<number>(like);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const data = useSelector((state: RootState) => state.thread);
-  console.log(data);
-
+  // const data = useSelector((state: RootState) => state.thread);
+  const data = useSelector((state: RootState) => state.user);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+
+  useEffect(() => {
+    dispatch(getThread());
+  }, [dispatch]);
 
   // const handleLike = () => {
   //   if (!liked) {
@@ -44,14 +52,17 @@ const CardPost: React.FC = () => {
   //     setCountLike(countLike - 1);
   //   }
   // };
+  const handleModal = (id: number) => {
+    setModals((prevModals) => ({
+      ...prevModals,
+      [id]: !prevModals[id],
+    }));
+  };
 
-  // const { data } = useFetchThread();
-  // console.log(data);
-  // console.log(reply?);
   return (
     <>
-      {data?.map((item: IThread) => (
-        <Card mt={2} p={4}>
+      {data.user?.map((item: IThread, key: number) => (
+        <Card mt={2} p={4} position={"relative"} key={key}>
           <Box>
             <Flex gap={4}>
               <Box>
@@ -123,6 +134,52 @@ const CardPost: React.FC = () => {
                   {/* End Modal */}
                 </Flex>
               </Box>
+              <Box
+                ml="auto"
+                mr={4}
+                // {...modals[item.id] ? { display: "block" } : { display: "none" }}
+              >
+                <FaEllipsisH onClick={() => handleModal(item.id)} />
+              </Box>
+              {modals[item.id] && (
+                <Box
+                  position={"absolute"}
+                  w={"85px"}
+                  bg={"darkgray"}
+                  shadow={10}
+                  rounded={5}
+                  top={7}
+                  px={1}
+                  py={1}
+                  right={7}
+                >
+                  <Button
+                    w={"100%"}
+                    rounded={5}
+                    display={"flex"}
+                    alignItems={"center"}
+                    bg={"white"}
+                    textColor={"black"}
+                    fontWeight={"bold"}
+                    justifyContent={"center"}
+                    h={"30px"}
+                  >
+                    <FaEdit />
+                  </Button>
+                  <Button
+                    h={"30px"}
+                    w={"100%"}
+                    mt={1}
+                    rounded={5}
+                    display={"flex"}
+                    alignItems={"center"}
+                    bg={"red"}
+                    textColor={"white"}
+                  >
+                    <FaRegTrashAlt />
+                  </Button>
+                </Box>
+              )}
             </Flex>
           </Box>
         </Card>

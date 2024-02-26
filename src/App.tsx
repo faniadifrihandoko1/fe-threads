@@ -14,11 +14,11 @@ function App() {
   async function check() {
     try {
       setAuthToken(localStorage.token);
-      console.log(localStorage.token);
+
       const response = await axiosInstance.get("/check");
       dispatch(AUTH_CHECK(response.data.data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
 

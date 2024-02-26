@@ -1,7 +1,7 @@
 import { IUser } from "../../types/auth";
 import { createSlice } from "@reduxjs/toolkit";
 import { jwtDecode } from "jwt-decode";
-import { setAuthToken } from "../../lib/axios";
+
 const initialAuthUser: IUser = {
   id: 0,
   username: "",
@@ -18,10 +18,9 @@ export const authSlice = createSlice({
     AUTH_LOGIN: (state, action) => {
       console.log(`action`, action);
       localStorage.setItem("token", action.payload);
-      setAuthToken(action.payload);
 
       const userLogin: IUser = jwtDecode(action.payload);
-      console.log(`user Login`, userLogin);
+
       const user: IUser = {
         id: userLogin.id,
         username: userLogin.username,
@@ -34,7 +33,6 @@ export const authSlice = createSlice({
     },
     AUTH_CHECK: (state, action) => {
       const payload = action.payload;
-      console.log(payload);
 
       const user: IUser = {
         id: payload.id,

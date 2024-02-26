@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type IThread = {
   id: number;
   content: string;
@@ -5,7 +6,7 @@ export type IThread = {
   created_at: string;
   updated_at: string;
   user?: IUser;
-  reply?: IReply;
+  reply?: IReply[];
   like?: ILike[];
   reply_count?: number;
   like_count?: number;
@@ -13,23 +14,26 @@ export type IThread = {
 
 export type IUser = {
   id: number;
-  username: string;
+  username?: string;
   fullName: string;
   email: string;
-  photo_profile: string;
-  bio: string;
-  created_at: string;
-  updated_at: string;
+  photo_profile?: string;
+  bio?: string;
 };
 
 export type IReply = {
   id: number;
   image: string;
   content: string;
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
   user?: IUser;
-  like?: ILike;
+  like?: {
+    id: number;
+    fullname: string;
+    username: string;
+    photo_profile: string;
+  };
 };
 
 export type ILike = {

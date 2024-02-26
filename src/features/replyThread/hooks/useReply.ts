@@ -1,33 +1,18 @@
 import { ChangeEvent, useState } from "react";
-// import { axiosInstance } from "../../../lib/axios";
-import { IPostThread } from "../../../types/thread";
 
-// import { createThread, getThread } from "../../../store/slices/Test";
+import { IPostThread } from "../../../types/thread";
+import { axiosInstance } from "../../../lib/axios";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { createThread, getThread } from "../../../store/redux/createAsync";
+import { getThread } from "../../../store/redux/createAsync";
 
-function useThreads() {
+export default function useReply() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  // const dispatch = useDispatch();
-
   const [data, setData] = useState<IPostThread>({
     content: "",
     image: null,
   });
-  // const getThreads = async () => {
-  //   try {
-  //     const response = await axiosInstance.get("/thread");
-  //     // dispatch(GET_THREAD(response.data));
-  //   } catch (error) {
-  //     // console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getThreads();
-  // }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
@@ -44,24 +29,25 @@ function useThreads() {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (id: number) => {
     const formData = new FormData();
     formData.append("content", data.content as string);
     formData.append("image", data.image as File);
-
+    console.log(data);
     try {
-      dispatch(createThread(formData));
+      const response = await axiosInstance.post(
+        `/thread/reply/${id}`,
+        formData
+      );
       dispatch(getThread());
+      //   dispatch(createReply(formData));
+      console.log(response);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
-
   return {
     handleChange,
     handleSubmit,
-    data,
   };
 }
-
-export default useThreads;

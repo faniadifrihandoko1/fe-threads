@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type IThread = {
   id: number;
   content: string;
@@ -24,7 +25,7 @@ export type IReply = {
   created_at: string;
   updated_at: string;
   user?: IUser;
-  like?: ILike[];
+  like?: any[];
 };
 
 export type ILike = {
