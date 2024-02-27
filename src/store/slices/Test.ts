@@ -1,7 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 // import { getThread } from "../redux/createAsync";
 
-import { createThread, deleteThread, getThread } from "../redux/createAsync";
+import {
+  createThread,
+  deleteThread,
+  getThread,
+  likeThread,
+} from "../redux/createAsync";
 import { IThread } from "../../types/thread";
 
 // const initialThread: any = [];
@@ -60,6 +65,22 @@ export const userSlice = createSlice({
 
     builder.addCase(deleteThread.fulfilled, (state, action) => {
       state.user = state.user.filter((item) => item.id !== action.payload.id);
+    });
+
+    builder.addCase(likeThread.fulfilled, (state, action) => {
+      console.log(`action`, action);
+      state.user = state.user.filter((item) => {
+        if (item.id === action.payload?.threadId) {
+          return {
+            ...item,
+            like_count: action.payload?.isLike
+              ? (item.like_count ?? 0) + 1
+              : (item.like_count ?? 0) - 1,
+          };
+        }
+        return item;
+      });
+      return state;
     });
   },
 });

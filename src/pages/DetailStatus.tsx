@@ -6,11 +6,10 @@ import MyProfile from "../components/MyProfile";
 import CardFollow from "../components/CardFollow";
 import Footer from "../components/Footer";
 import StatusDetail from "../features/replyThread/component/StatusDetail";
-import CreateReplyStatus from "../features/replyThread/component/CreateReplyStatus";
 
 // import data from "../utils/data";
 // import { useFetchThread } from "../features/threads/useFetchThread";
-import ReplyStatus from "../features/replyThread/component/ReplyThread";
+
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/type/RootState";
@@ -49,7 +48,7 @@ const DetailStatus: React.FC = () => {
         py={2}
       >
         <StatusDetail />
-        <ReplyStatus />
+
         <Box display={{ base: "block", md: "none" }} bottom={0}>
           <Sidebar />
         </Box>

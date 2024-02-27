@@ -1,6 +1,7 @@
 import { IUser } from "../../types/auth";
 import { createSlice } from "@reduxjs/toolkit";
 import { jwtDecode } from "jwt-decode";
+import { setAuthToken } from "../../lib/axios";
 
 const initialAuthUser: IUser = {
   id: 0,
@@ -18,6 +19,7 @@ export const authSlice = createSlice({
     AUTH_LOGIN: (state, action) => {
       console.log(`action`, action);
       localStorage.setItem("token", action.payload);
+      setAuthToken(action.payload);
 
       const userLogin: IUser = jwtDecode(action.payload);
 
@@ -41,8 +43,18 @@ export const authSlice = createSlice({
         email: payload.email,
         photo_profile: payload.email,
         bio: payload.bio,
+        follower_count: payload.follower_count,
+        following_count: payload.following_count,
       };
       return user;
+    },
+
+    AUTH_LOGOUT: () => {
+      setAuthToken("");
+      localStorage.removeItem("token");
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      return initialAuthUser;
     },
   },
 });

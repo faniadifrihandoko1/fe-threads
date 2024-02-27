@@ -2,7 +2,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import DetailStatus from "./pages/DetailStatus";
 import Home from "./pages/Home";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import ProfileEdit from "./pages/ProfileEdit";
 import { axiosInstance, setAuthToken } from "./lib/axios";
 import { useEffect } from "react";
@@ -11,6 +11,7 @@ import { AUTH_CHECK } from "./store/rootRecuder";
 
 function App() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   async function check() {
     try {
       setAuthToken(localStorage.token);
@@ -23,7 +24,11 @@ function App() {
   }
 
   useEffect(() => {
-    check();
+    if (!localStorage.token) {
+      navigate("/login");
+    } else {
+      check();
+    }
   }, []);
   return (
     <Routes>

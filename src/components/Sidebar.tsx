@@ -13,9 +13,18 @@ import { FaRegHeart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { TbLogout2 } from "react-icons/tb";
 import logo from "../assets/logo.svg";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AUTH_LOGOUT } from "../store/rootRecuder";
 
 export default function Sidebar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    dispatch(AUTH_LOGOUT());
+    navigate("/login");
+  }
   return (
     <Flex
       borderRadius={"1%"}
@@ -102,11 +111,15 @@ export default function Sidebar() {
       </Box>
       <Spacer />
       <Box px="30px" display={{ base: "none", md: "block" }}>
-        <Button alignItems="center" mt="10px" gap="3" bg="transparent">
+        <Button
+          alignItems="center"
+          onClick={handleLogout}
+          mt="10px"
+          gap="3"
+          bg="transparent"
+        >
           <TbLogout2 size={25} />
-          <Link to={"/login"} color={"green"}>
-            Logout
-          </Link>
+          Logout
         </Button>
       </Box>
     </Flex>

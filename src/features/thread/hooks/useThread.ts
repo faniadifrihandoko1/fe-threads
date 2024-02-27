@@ -6,10 +6,13 @@ import { IPostThread } from "../../../types/thread";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { createThread, getThread } from "../../../store/redux/createAsync";
+import { axiosInstance } from "../../../lib/axios";
+// import { RootState } from "../../../store/type/RootState";
 
 function useThreads() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  // const userId = useSelector((state: RootState) => state.auth.id);
   // const dispatch = useDispatch();
 
   const [data, setData] = useState<IPostThread>({
@@ -57,10 +60,21 @@ function useThreads() {
     }
   };
 
+  const handleLike = async (threadId: number) => {
+    try {
+      const response = await axiosInstance.post(`/thread/like/${threadId}`);
+      console.log(`response like`, response);
+      // dispatch(likeThread(threadId));
+      dispatch(getThread());
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     handleChange,
     handleSubmit,
     data,
+    handleLike,
   };
 }
 

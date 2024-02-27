@@ -28,19 +28,31 @@ import { RootState } from "../../../store/type/RootState";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { getThread } from "../../../store/redux/createAsync";
 
+import { axiosInstance } from "../../../lib/axios";
+import useThreads from "../hooks/useThread";
+
 const CardPost: React.FC = () => {
   const [modals, setModals] = useState<{ [key: number]: boolean }>({});
+  const { handleLike } = useThreads();
   // const { content, created_at, id, image, user } = props;
   // const [liked, setLiked] = useState<boolean>(false);
   // const [countLike, setCountLike] = useState<number>(like);
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const data = useSelector((state: RootState) => state.thread);
   const data = useSelector((state: RootState) => state.user);
+  // const userId = useSelector((state: RootState) => state.auth.id);
+  console.log(`data`, data);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
+  const fetch = async () => {
+    const response = await axiosInstance.get("/thread");
+    return response.data;
+  };
+
   useEffect(() => {
     dispatch(getThread());
+    fetch();
   }, [dispatch]);
 
   // const handleLike = () => {
@@ -100,7 +112,13 @@ const CardPost: React.FC = () => {
                     bg="white"
                   >
                     <Flex gap={2}>
-                      <FaRegHeart color="gray" size={18} />
+                      <FaRegHeart
+                        onClick={() => {
+                          handleLike(item.id);
+                        }}
+                        color={item.isLike ? "red" : "gray"}
+                        size={18}
+                      />
                       <Text color="gray" fontSize={14}>
                         {item.like_count}
                       </Text>

@@ -8,8 +8,9 @@ export type IThread = {
   user?: IUser;
   reply?: IReply[];
   like?: ILike[];
-  reply_count?: number;
-  like_count?: number;
+  reply_count?: number | undefined;
+  like_count?: number | undefined;
+  isLike?: boolean;
 };
 
 export type IUser = {

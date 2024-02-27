@@ -19,4 +19,6 @@ export interface IUser {
   exp?: number;
   iat?: number;
   password?: string;
+  following_count?: number;
+  follower_count?: number;
 }
