@@ -1,16 +1,19 @@
 import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../lib/axios";
 
-export const getThread = createAsyncThunk("user/showThread", async () => {
-  try {
-    const response = await axiosInstance.get(`/thread?id=`);
+export const getThread = createAsyncThunk(
+  "user/showThread",
+  async (userId: number) => {
+    try {
+      const response = await axiosInstance.get(`/thread?id=${userId}`);
 
-    return response.data;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: Error | any) {
-    return isRejectedWithValue(error.response.data);
+      return response.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: Error | any) {
+      return isRejectedWithValue(error.response.data);
+    }
   }
-});
+);
 
 export const createThread = createAsyncThunk(
   "createThread",

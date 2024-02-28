@@ -25,13 +25,14 @@ export default function ReplyThread({
   user,
 }: IReply) {
   // const { data } = useFetchThread();
+  console.log(user);
   return (
     <>
       <Card mt={2} p={4}>
         <Box>
           <Flex gap={4}>
             <Box>
-              <Avatar name="Dan Abrahmov" src={image} />
+              <Avatar name={user?.fullName} src={user?.photo_profile} />
             </Box>
             <Box>
               <Flex gap={1} alignItems="center">

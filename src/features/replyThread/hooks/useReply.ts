@@ -2,13 +2,15 @@ import { ChangeEvent, useState } from "react";
 
 import { IPostThread } from "../../../types/thread";
 import { axiosInstance } from "../../../lib/axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { getThread } from "../../../store/redux/createAsync";
+import { RootState } from "../../../store/type/RootState";
 
 export default function useReply() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const userId = useSelector((state: RootState) => state.auth.id);
   const [data, setData] = useState<IPostThread>({
     content: "",
     image: null,
@@ -39,7 +41,7 @@ export default function useReply() {
         `/thread/reply/${id}`,
         formData
       );
-      dispatch(getThread());
+      dispatch(getThread(userId));
       //   dispatch(createReply(formData));
       console.log(response);
     } catch (error) {

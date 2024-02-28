@@ -28,6 +28,7 @@ import ReplyThread from "./ReplyThread";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const StatusDetail = () => {
   const data = useSelector((state: RootState) => state.user);
+  const userId = useSelector((state: RootState) => state.auth.id);
   const { id } = useParams();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -39,7 +40,7 @@ const StatusDetail = () => {
   const dataPost = filterData[0];
 
   useEffect(() => {
-    dispatch(getThread());
+    dispatch(getThread(userId));
   }, [dispatch]);
 
   return (
@@ -58,7 +59,7 @@ const StatusDetail = () => {
         <Box mt={3}>
           <Box>
             <Flex gap={2} alignItems="center">
-              <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+              <Avatar name="Dan Abrahmov" src={dataPost.user?.photo_profile} />
               <Box>
                 <Text>{dataPost.user?.fullName}</Text>
                 <Text color="gray" mt={-1}>

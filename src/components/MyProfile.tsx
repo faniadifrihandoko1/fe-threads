@@ -18,7 +18,7 @@ const MyProfile: React.FC<userProps> = () => {
   const boxBg = useColorModeValue("white !important", "#111c44 !important");
   const mainText = useColorModeValue("gray.800", "white");
   const user = useSelector((state: RootState) => state.auth);
-  // console.log(`my profile`, user);
+  console.log(`my profile`, user);
 
   return (
     <Card mx={4} my={2}>
@@ -37,7 +37,7 @@ const MyProfile: React.FC<userProps> = () => {
         <Flex w="full">
           <Flex flexDirection="column" mb="30px" w="full" px={4}>
             <Image
-              src="https://i.ibb.co/B3gYTYs/Profile-Image.png"
+              src={user.photo_profile}
               border="5px solid red"
               borderColor={boxBg}
               width="68px"
@@ -69,14 +69,14 @@ const MyProfile: React.FC<userProps> = () => {
           <Flex gap={4} alignItems="center">
             <Flex alignItems="center" gap="2px">
               <Text fontWeight="bold" fontSize={"15px"}>
-                291
+                {user.following_count ? user.following_count : 0}
               </Text>
               <Text fontSize="14px">Following</Text>
             </Flex>
 
             <Flex alignItems="center" gap="2px">
               <Text fontWeight="bold" fontSize={"15px"}>
-                23
+                {user.follower_count ? user.follower_count : 0}
               </Text>
               <Text fontSize="14px" color={mainText}>
                 Follower

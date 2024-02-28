@@ -1,21 +1,93 @@
-import { Box, Card, Flex } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  Flex,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
+import useFollow from "../features/follow/hooks/useFollow";
+import { IUser } from "../types/thread";
 
 const Follow: React.FC = () => {
+  const { follower, following, handleFollow } = useFollow();
+
   return (
-    <>
-      <Card py={4}>
-        <Flex justify={"space-between"} px={6}>
-          <Box>Followers</Box>
-          <Box>Following</Box>
-        </Flex>
-        <Flex>
-          <Box>
-            <Flex></Flex>
-          </Box>
-        </Flex>
-      </Card>
-    </>
+    <Card>
+      <Tabs>
+        <TabList>
+          <Tab w={"50%"}>Follower</Tab>
+          <Tab w={"50%"}>Following</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <Flex direction="column" gap={2}>
+              {follower.map((item: IUser) => (
+                <Flex justify="space-between">
+                  <Flex gap={2} alignItems="center">
+                    <Avatar name="Dan Abrahmov" src={item.photo_profile} />
+                    <Box>
+                      <Text>{item.fullName}</Text>
+                      <Text color="gray" mt={-1}>
+                        @{item.username}
+                      </Text>
+                    </Box>
+                  </Flex>
+                  <Button
+                    // onClick={handleFollow}
+                    fontSize="13px"
+                    fontWeight="bold"
+                    bg="transparent"
+                    border="1px"
+                    my="3px"
+                    h="30px"
+                    rounded="16px"
+                  >
+                    {item.is_following ? "following" : "follow"}
+                  </Button>
+                </Flex>
+              ))}
+            </Flex>
+          </TabPanel>
+          <TabPanel>
+            <Flex direction="column" gap={2}>
+              {following.map((item: IUser) => (
+                <Flex justify="space-between">
+                  <Flex gap={2} alignItems="center">
+                    <Avatar name="Dan Abrahmov" src={item.photo_profile} />
+                    <Box>
+                      <Text>{item.fullName}</Text>
+                      <Text color="gray" mt={-1}>
+                        @{item.username}
+                      </Text>
+                    </Box>
+                  </Flex>
+                  <Button
+                    // onClick={handleFollow}
+                    fontSize="13px"
+                    fontWeight="bold"
+                    bg="transparent"
+                    border="1px"
+                    my="3px"
+                    h="30px"
+                    rounded="16px"
+                  >
+                    {item.is_following ? "following" : "follow"}
+                  </Button>
+                </Flex>
+              ))}
+            </Flex>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Card>
   );
 };
 

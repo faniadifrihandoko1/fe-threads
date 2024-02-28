@@ -21,6 +21,7 @@ const DetailStatus: React.FC = () => {
   // const { data } = useFetchThread();
   // console.log("detailstatus", data);
   const data = useSelector((state: RootState) => state.user);
+  const userId = useSelector((state: RootState) => state.auth.id);
   const { id } = useParams();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,7 +33,7 @@ const DetailStatus: React.FC = () => {
   const dataPost = filterData[0];
   console.log(`datapost`, dataPost);
   useEffect(() => {
-    dispatch(getThread());
+    dispatch(getThread(userId));
   }, [dispatch]);
   return (
     <Flex w="full">

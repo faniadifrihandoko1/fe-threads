@@ -3,15 +3,17 @@ import { ChangeEvent, useState } from "react";
 import { IPostThread } from "../../../types/thread";
 
 // import { createThread, getThread } from "../../../store/slices/Test";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { createThread, getThread } from "../../../store/redux/createAsync";
 import { axiosInstance } from "../../../lib/axios";
+import { RootState } from "../../../store/type/RootState";
 // import { RootState } from "../../../store/type/RootState";
 
 function useThreads() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const userId = useSelector((state: RootState) => state.auth.id);
   // const userId = useSelector((state: RootState) => state.auth.id);
   // const dispatch = useDispatch();
 
@@ -54,7 +56,7 @@ function useThreads() {
 
     try {
       dispatch(createThread(formData));
-      dispatch(getThread());
+      dispatch(getThread(userId));
     } catch (error) {
       // console.log(error);
     }
@@ -65,7 +67,7 @@ function useThreads() {
       const response = await axiosInstance.post(`/thread/like/${threadId}`);
       console.log(`response like`, response);
       // dispatch(likeThread(threadId));
-      dispatch(getThread());
+      dispatch(getThread(userId));
     } catch (error) {
       console.log(error);
     }

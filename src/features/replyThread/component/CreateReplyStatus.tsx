@@ -10,16 +10,19 @@ import {
 import React from "react";
 import { LuImagePlus } from "react-icons/lu";
 import useReply from "../hooks/useReply";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/type/RootState";
 // import { useParams } from "react-router-dom";
 
 export default function CreateReplyStatus({ id }: { id: number }) {
   // const { id } = useParams();
   const { handleChange, handleSubmit } = useReply();
+  const userLogin = useSelector((state: RootState) => state.auth);
 
   return (
     <Card p={4}>
       <Flex gap={4} alignItems="center">
-        <Avatar name="Dan Abrahmov" src="https://bit.ly/sage-adebayo" />
+        <Avatar name="Dan Abrahmov" src={userLogin.photo_profile} />
         <Input
           placeholder="Whats Is Happening!!"
           name="content"

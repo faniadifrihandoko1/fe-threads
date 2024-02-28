@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IUserLogin {
   email: string;
   password: string;
@@ -19,6 +20,8 @@ export interface IUser {
   exp?: number;
   iat?: number;
   password?: string;
+  following?: IUser[];
+  follower?: IUser[];
   following_count?: number;
   follower_count?: number;
 }

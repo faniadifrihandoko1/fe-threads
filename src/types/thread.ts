@@ -10,7 +10,7 @@ export type IThread = {
   like?: ILike[];
   reply_count?: number | undefined;
   like_count?: number | undefined;
-  isLike?: boolean;
+  isLiked?: boolean;
 };
 
 export type IUser = {
@@ -20,6 +20,7 @@ export type IUser = {
   email: string;
   photo_profile?: string;
   bio?: string;
+  is_following?: boolean;
 };
 
 export type IReply = {

@@ -75,16 +75,19 @@ export default function Sidebar() {
             </Button>
           </Box>
           <Box mt="10px">
-            <Button alignItems="center" gap="3" bg="transparent">
-              <FaRegHeart size={25} />
-              <Text
-                fontWeight="semibold"
-                display={{ base: "none", md: "block" }}
-              >
-                Follows
-              </Text>
-            </Button>
+            <NavLink to={"/follows"}>
+              <Button alignItems="center" gap="3" bg="transparent">
+                <FaRegHeart size={25} />
+                <Text
+                  fontWeight="semibold"
+                  display={{ base: "none", md: "block" }}
+                >
+                  Follows
+                </Text>
+              </Button>
+            </NavLink>
           </Box>
+
           <Box mt="10px">
             <Button alignItems="center" gap="3" bg="transparent">
               <CgProfile size={25} />

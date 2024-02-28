@@ -8,6 +8,7 @@ import { axiosInstance, setAuthToken } from "./lib/axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AUTH_CHECK } from "./store/rootRecuder";
+import FollowPage from "./pages/FollowPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/follows" element={<FollowPage />} />
       <Route path="/detail-status/:id" element={<DetailStatus />} />
       <Route path="/edit-profile/:id" element={<ProfileEdit />} />
       <Route path="/register" element={<Register />} />
