@@ -64,15 +64,17 @@ export default function Sidebar() {
             </NavLink>
           </Box>
           <Box mt="10px">
-            <Button alignItems="center" gap="3" bg="transparent">
-              <MdPersonSearch size={25} />
-              <Text
-                fontWeight="semibold"
-                display={{ base: "none", md: "block" }}
-              >
-                Search
-              </Text>
-            </Button>
+            <NavLink to={"/search"}>
+              <Button alignItems="center" gap="3" bg="transparent">
+                <MdPersonSearch size={25} />
+                <Text
+                  fontWeight="semibold"
+                  display={{ base: "none", md: "block" }}
+                >
+                  Search
+                </Text>
+              </Button>
+            </NavLink>
           </Box>
           <Box mt="10px">
             <NavLink to={"/follows"}>
@@ -89,15 +91,17 @@ export default function Sidebar() {
           </Box>
 
           <Box mt="10px">
-            <Button alignItems="center" gap="3" bg="transparent">
-              <CgProfile size={25} />
-              <Text
-                fontWeight="semibold"
-                display={{ base: "none", md: "block" }}
-              >
-                Profile
-              </Text>
-            </Button>
+            <NavLink to={"/profile"}>
+              <Button alignItems="center" gap="3" bg="transparent">
+                <CgProfile size={25} />
+                <Text
+                  fontWeight="semibold"
+                  display={{ base: "none", md: "block" }}
+                >
+                  Profile
+                </Text>
+              </Button>
+            </NavLink>
           </Box>
 
           <Button

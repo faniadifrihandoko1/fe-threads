@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import MyProfile from "../components/MyProfile";
-import CardFollow from "../components/CardFollow";
+import CardFollow from "../features/suggestion/components/Suggestion";
 import Footer from "../components/Footer";
 
 interface isLayoutProps {
@@ -20,10 +20,8 @@ export default function SetLayout({ children }: isLayoutProps) {
       <Box w="20%" display={{ base: "none", md: "block" }}>
         <Sidebar />
       </Box>
-      <Box w={{ base: "100%", md: "50%" }} py={2}>
-        {children}
-      </Box>
-      <Box w="30%" display={{ base: "none", md: "block" }}>
+      <Box w={{ base: "100%", md: "50%" }}>{children}</Box>
+      <Box w="30%" display={{ base: "none", md: "block" }} px={4}>
         <MyProfile />
         <CardFollow />
         <Footer />

@@ -4,7 +4,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <Card mx={4} my={2} px="20px" py="10px">
+    <Card my={2} px="20px" py="10px">
       <Flex alignItems="center" gap={2} justifyContent={"center"}>
         <Text> Developed by Fani </Text>
         <Icon boxSize={2} color="gray" mt={1} viewBox="0 0 200 200">

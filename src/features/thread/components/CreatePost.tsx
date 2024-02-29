@@ -51,7 +51,7 @@ const CreatePost: React.FC = () => {
   //     },
   //   });
   return (
-    <Card p={4}>
+    <Card p={4} mt={2}>
       <Input
         placeholder="Whats Is Happening!!"
         h={"50px"}

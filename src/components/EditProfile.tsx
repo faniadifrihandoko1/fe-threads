@@ -8,7 +8,7 @@ const EditProfile: React.FC = () => {
   const { handleChange, handleSubmit, form } = useUpdateUser();
   return (
     <>
-      <Card pt={4}>
+      <Card pt={4} mt={2}>
         <Flex alignItems={"center"} gap={2} ml={4}>
           <NavLink to={"/"}>
             <IoMdArrowRoundBack />

@@ -12,14 +12,15 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import useFollow from "../features/follow/hooks/useFollow";
-import { IUser } from "../types/thread";
+import useFollow from "../hooks/useFollow";
+import { IUser } from "../../../types/thread";
 
 const Follow: React.FC = () => {
   const { follower, following, handleFollow } = useFollow();
+  console.log(`follower`, follower);
 
   return (
-    <Card>
+    <Card mt={2}>
       <Tabs>
         <TabList>
           <Tab w={"50%"}>Follower</Tab>
@@ -41,16 +42,15 @@ const Follow: React.FC = () => {
                     </Box>
                   </Flex>
                   <Button
-                    // onClick={handleFollow}
+                    onClick={() => handleFollow(Number(item.userId))}
                     fontSize="13px"
                     fontWeight="bold"
-                    bg="transparent"
                     border="1px"
                     my="3px"
                     h="30px"
                     rounded="16px"
                   >
-                    {item.is_following ? "following" : "follow"}
+                    {item.is_following ? "unfollow" : "follow"}
                   </Button>
                 </Flex>
               ))}
@@ -70,7 +70,7 @@ const Follow: React.FC = () => {
                     </Box>
                   </Flex>
                   <Button
-                    // onClick={handleFollow}
+                    onClick={() => handleFollow(Number(item.userId))}
                     fontSize="13px"
                     fontWeight="bold"
                     bg="transparent"
@@ -79,7 +79,7 @@ const Follow: React.FC = () => {
                     h="30px"
                     rounded="16px"
                   >
-                    {item.is_following ? "following" : "follow"}
+                    {item.is_following ? "unfollow" : "follow"}
                   </Button>
                 </Flex>
               ))}

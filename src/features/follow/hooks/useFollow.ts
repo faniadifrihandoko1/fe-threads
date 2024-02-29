@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../../../lib/axios";
+import useSuggestion from "../../suggestion/hooks/useSuggestion";
 
 export default function useFollow() {
+  const { fetchSuggest } = useSuggestion();
   const [follower, setFollower] = useState([]);
   const [following, setFollowing] = useState([]);
 
@@ -24,12 +26,14 @@ export default function useFollow() {
   };
 
   const handleFollow = async (idFollow: number) => {
+    console.log(idFollow);
     try {
       const response = await axiosInstance.post(
         `/user/follow?following=${idFollow}`
       );
       fetchFollower();
       fetchFollowing();
+      fetchSuggest();
       console.log(`response handleFollow`, response);
     } catch (error) {
       console.log(`handle Follow`, error);
@@ -41,5 +45,5 @@ export default function useFollow() {
     fetchFollowing();
   }, []);
 
-  return { follower, following, handleFollow };
+  return { follower, following, handleFollow, fetchFollowing, fetchFollower };
 }

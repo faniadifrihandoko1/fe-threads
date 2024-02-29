@@ -17,10 +17,11 @@ export type IUser = {
   id: number;
   username?: string;
   fullName: string;
-  email: string;
+  email?: string;
   photo_profile?: string;
   bio?: string;
   is_following?: boolean;
+  userId?: number;
 };
 
 export type IReply = {

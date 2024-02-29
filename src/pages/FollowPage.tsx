@@ -1,5 +1,5 @@
 import SetLayout from "../layout/SetLayout";
-import Follow from "../components/Follow";
+import Follow from "../features/follow/components/Follow";
 
 export default function FollowPage() {
   return (

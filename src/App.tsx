@@ -10,6 +10,9 @@ import { useDispatch } from "react-redux";
 import { AUTH_CHECK } from "./store/rootRecuder";
 import FollowPage from "./pages/FollowPage";
 
+import SearchPage from "./pages/SearchPage";
+import ProfilePage from "./pages/ProfilePage";
+
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,6 +38,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/follows" element={<FollowPage />} />
+      <Route path="/search" element={<SearchPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/detail-status/:id" element={<DetailStatus />} />
       <Route path="/edit-profile/:id" element={<ProfileEdit />} />
       <Route path="/register" element={<Register />} />

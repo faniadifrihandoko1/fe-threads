@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 
 import MyProfile from "../components/MyProfile";
-import CardFollow from "../components/CardFollow";
+import CardFollow from "../features/suggestion/components/Suggestion";
 import Footer from "../components/Footer";
 import StatusDetail from "../features/replyThread/component/StatusDetail";
 

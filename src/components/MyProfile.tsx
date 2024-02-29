@@ -21,7 +21,7 @@ const MyProfile: React.FC<userProps> = () => {
   console.log(`my profile`, user);
 
   return (
-    <Card mx={4} my={2}>
+    <Card my={2}>
       <Flex
         borderRadius="20px"
         bg={boxBg}
