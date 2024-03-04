@@ -58,3 +58,13 @@ export const likeThread = createAsyncThunk(
     }
   }
 );
+
+export const getAllUser = createAsyncThunk("getAllUser", async () => {
+  try {
+    const response = await axiosInstance.get("/user/follow?type=allUser");
+    return response.data.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: Error | any) {
+    return isRejectedWithValue(error.response.data);
+  }
+});

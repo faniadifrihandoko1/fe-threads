@@ -4,7 +4,7 @@ import { IPostThread } from "../../../types/thread";
 import { axiosInstance } from "../../../lib/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { getThread } from "../../../store/redux/createAsync";
+import { getThread } from "../../../store/asyncThunk/createAsync";
 import { RootState } from "../../../store/type/RootState";
 
 export default function useReply() {

@@ -6,7 +6,7 @@ import {
   deleteThread,
   getThread,
   likeThread,
-} from "../redux/createAsync";
+} from "../asyncThunk/createAsync";
 import { IThread } from "../../types/thread";
 
 // const initialThread: any = [];

@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/type/RootState";
 import { IThread } from "../../../types/thread";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { getThread } from "../../../store/redux/createAsync";
+import { getThread } from "../../../store/asyncThunk/createAsync";
 import CreateReplyStatus from "./CreateReplyStatus";
 import ReplyThread from "./ReplyThread";
 

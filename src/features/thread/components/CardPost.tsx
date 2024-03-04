@@ -20,7 +20,7 @@ import { IThread } from "../../../types/thread";
 import { RootState } from "../../../store/type/RootState";
 
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { getThread } from "../../../store/redux/createAsync";
+import { getThread } from "../../../store/asyncThunk/createAsync";
 
 import { axiosInstance } from "../../../lib/axios";
 import useThreads from "../hooks/useThread";

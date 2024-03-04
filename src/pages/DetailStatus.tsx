@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/type/RootState";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { IThread } from "../types/thread";
-import { getThread } from "../store/redux/createAsync";
+import { getThread } from "../store/asyncThunk/createAsync";
 
 const DetailStatus: React.FC = () => {
   // const { data } = useFetchThread();
