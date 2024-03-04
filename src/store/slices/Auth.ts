@@ -8,7 +8,7 @@ const initialAuthUser: IUser = {
   username: "",
   fullName: "",
   email: "",
-  photo_profile: "",
+  photo_profile: null,
   bio: "",
   follower_count: 0,
   following_count: 0,
@@ -51,6 +51,14 @@ export const authSlice = createSlice({
         following_count: payload.following_count,
       };
       return user;
+    },
+    SET_FOLOWING_COUNT: (state, action) => {
+      const { is_following } = action.payload;
+      if (!is_following) {
+        state.following_count = (state.following_count || 0) + 1;
+      } else {
+        state.following_count = (state.following_count || 0) - 1;
+      }
     },
 
     AUTH_LOGOUT: () => {

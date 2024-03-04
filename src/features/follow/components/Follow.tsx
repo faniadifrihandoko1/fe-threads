@@ -14,23 +14,32 @@ import {
 import React from "react";
 import useFollow from "../hooks/useFollow";
 import { IUser } from "../../../types/thread";
+import { useDispatch } from "react-redux";
+import { SET_FOLLOW_URL } from "../../../store/rootRecuder";
 
 const Follow: React.FC = () => {
-  const { follower, following, handleFollow } = useFollow();
-  console.log(`follower`, follower);
+  // const { follower, following, handleFollow } = useFollow();
+  const { follow, handleFollow } = useFollow();
+  const dispatch = useDispatch();
+
+  console.log(`follower`, follow);
 
   return (
     <Card mt={2}>
       <Tabs>
         <TabList>
-          <Tab w={"50%"}>Follower</Tab>
-          <Tab w={"50%"}>Following</Tab>
+          <Tab w={"50%"} onClick={() => dispatch(SET_FOLLOW_URL("follower"))}>
+            Follower
+          </Tab>
+          <Tab w={"50%"} onClick={() => dispatch(SET_FOLLOW_URL("following"))}>
+            Following
+          </Tab>
         </TabList>
 
         <TabPanels>
           <TabPanel>
             <Flex direction="column" gap={2}>
-              {follower.map((item: IUser) => (
+              {follow.map((item: IUser) => (
                 <Flex justify="space-between">
                   <Flex gap={2} alignItems="center">
                     <Avatar name="Dan Abrahmov" src={item.photo_profile} />
@@ -42,7 +51,9 @@ const Follow: React.FC = () => {
                     </Box>
                   </Flex>
                   <Button
-                    onClick={() => handleFollow(Number(item.userId))}
+                    onClick={() =>
+                      handleFollow(Number(item.userId), item.is_following)
+                    }
                     fontSize="13px"
                     fontWeight="bold"
                     border="1px"
@@ -58,7 +69,7 @@ const Follow: React.FC = () => {
           </TabPanel>
           <TabPanel>
             <Flex direction="column" gap={2}>
-              {following.map((item: IUser) => (
+              {follow.map((item: IUser) => (
                 <Flex justify="space-between">
                   <Flex gap={2} alignItems="center">
                     <Avatar name="Dan Abrahmov" src={item.photo_profile} />
@@ -70,7 +81,9 @@ const Follow: React.FC = () => {
                     </Box>
                   </Flex>
                   <Button
-                    onClick={() => handleFollow(Number(item.userId))}
+                    onClick={() =>
+                      handleFollow(Number(item.userId), item.is_following)
+                    }
                     fontSize="13px"
                     fontWeight="bold"
                     bg="transparent"

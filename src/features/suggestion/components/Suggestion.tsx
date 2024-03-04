@@ -4,15 +4,15 @@ import useSuggestion from "../hooks/useSuggestion";
 
 const CardFollow: React.FC = () => {
   const { handleFollow, suggest } = useSuggestion();
-  console.log(suggest);
+
   return (
     <Card my={2} px="20px" py="10px">
       <Text my={2} fontSize={18} fontWeight="bold">
         Suggested For You
       </Text>
       <Flex direction="column" gap={2}>
-        {suggest.map((item) => (
-          <Flex justify="space-between">
+        {suggest.map((item, index) => (
+          <Flex justify="space-between" key={index}>
             <Flex gap={2} alignItems="center">
               <Avatar name="Dan Abrahmov" src={item.photo_profile} />
               <Box>
@@ -23,7 +23,7 @@ const CardFollow: React.FC = () => {
               </Box>
             </Flex>
             <Button
-              onClick={() => handleFollow(item.id)}
+              onClick={() => handleFollow(item.id, item.is_following)}
               fontSize="13px"
               fontWeight="bold"
               bg="transparent"

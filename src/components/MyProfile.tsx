@@ -18,7 +18,6 @@ const MyProfile: React.FC<userProps> = () => {
   const boxBg = useColorModeValue("white !important", "#111c44 !important");
   const mainText = useColorModeValue("gray.800", "white");
   const user = useSelector((state: RootState) => state.auth);
-  console.log(`my profile`, user);
 
   return (
     <Card my={2}>

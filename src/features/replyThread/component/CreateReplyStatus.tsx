@@ -20,7 +20,7 @@ export default function CreateReplyStatus({ id }: { id: number }) {
   const userLogin = useSelector((state: RootState) => state.auth);
 
   return (
-    <Card p={4}>
+    <Card p={4} mt={2}>
       <Flex gap={4} alignItems="center">
         <Avatar name="Dan Abrahmov" src={userLogin.photo_profile} />
         <Input

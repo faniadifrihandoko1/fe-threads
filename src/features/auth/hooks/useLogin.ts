@@ -34,8 +34,9 @@ export function useLogin() {
       navigate("/");
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      // const message = error.response.data.message;
+      // dispatch(AUTH_LOGIN(message));
     }
   }
   return {

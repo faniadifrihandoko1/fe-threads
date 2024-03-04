@@ -21,19 +21,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/type/RootState";
 import { IThread } from "../../../types/thread";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { getThread } from "../../../store/redux/createAsync";
+import { getThread } from "../../../store/asyncThunk/createAsync";
 import CreateReplyStatus from "./CreateReplyStatus";
 import ReplyThread from "./ReplyThread";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const StatusDetail = () => {
-  const data = useSelector((state: RootState) => state.user);
+  const data = useSelector((state: RootState) => state.threads);
   const userId = useSelector((state: RootState) => state.auth.id);
   const { id } = useParams();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  const filterData = data.user?.filter(
+  const filterData = data.threads?.filter(
     (item: IThread) => item.id === Number(id)
   );
 
@@ -45,7 +45,7 @@ const StatusDetail = () => {
 
   return (
     <>
-      <Card p={4}>
+      <Card p={4} mt={2}>
         <Flex alignItems={"center"} gap={2}>
           <NavLink to={"/"}>
             <IoMdArrowRoundBack />

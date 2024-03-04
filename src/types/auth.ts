@@ -15,7 +15,7 @@ export interface IUser {
   username: string;
   fullName: string;
   email: string;
-  photo_profile?: string;
+  photo_profile?: any;
   bio?: string;
   exp?: number;
   iat?: number;

@@ -1,6 +1,6 @@
 import Login from "./components/Login";
 import Register from "./components/Register";
-import DetailStatus from "./pages/DetailStatus";
+
 import Home from "./pages/Home";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import ProfileEdit from "./pages/ProfileEdit";
@@ -12,9 +12,14 @@ import FollowPage from "./pages/FollowPage";
 
 import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
+import DetailThreadPage from "./pages/DetailThreadPage";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { getAllUser } from "./store/asyncThunk/createAsync";
 
 function App() {
   const dispatch = useDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatchUser = useDispatch<ThunkDispatch<any, any, any>>();
   const navigate = useNavigate();
   async function check() {
     try {
@@ -32,6 +37,7 @@ function App() {
       navigate("/login");
     } else {
       check();
+      dispatchUser(getAllUser());
     }
   }, []);
   return (
@@ -40,7 +46,7 @@ function App() {
       <Route path="/follows" element={<FollowPage />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/detail-status/:id" element={<DetailStatus />} />
+      <Route path="/detail-status/:id" element={<DetailThreadPage />} />
       <Route path="/edit-profile/:id" element={<ProfileEdit />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />

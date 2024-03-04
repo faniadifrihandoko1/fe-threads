@@ -3,6 +3,7 @@ import React from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { useUpdateUser } from "../features/user/hooks/useUpdateUser";
+import { TiPencil } from "react-icons/ti";
 
 const EditProfile: React.FC = () => {
   const { handleChange, handleSubmit, form } = useUpdateUser();
@@ -18,18 +19,44 @@ const EditProfile: React.FC = () => {
             Status
           </Text>
         </Flex>
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems={"center"}
-          gap={2}
-        >
-          <Avatar
-            name="Dan Abrahmov"
-            size={"xl"}
-            src="https://bit.ly/sage-adebayo"
+        <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
+          <Box position={"relative"}>
+            <label htmlFor="profile-picture">
+              <Avatar
+                name="Dan Abrahmov"
+                size="xl"
+                src={form.photo_profile}
+                _hover={{
+                  cursor: "pointer",
+                  filter: "grayscale(100%)",
+                }}
+              />
+              <Box
+                top={"70%"}
+                right={"5%"}
+                _hover={{
+                  cursor: "pointer",
+                }}
+                position={"absolute"}
+                bg="white"
+                border={"1px solid gray"}
+                shadow={"lg"}
+                rounded={"full"}
+                p={1}
+              >
+                <TiPencil size={20} />
+              </Box>
+            </label>
+          </Box>
+          <input
+            accept="image/*"
+            style={{ display: "none" }}
+            id="profile-picture"
+            name="photo_profile"
+            type="file"
+            onChange={handleChange}
           />
-          <Text>Change Profile Photo</Text>
+          <Text variant="outlined">Change Profile Photo</Text>
         </Box>
         <Box
           display={"flex"}

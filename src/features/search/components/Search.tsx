@@ -4,6 +4,7 @@ import useSearch from "../hooks/useSearch";
 
 export default function Search() {
   const { handleSearch, users, handleFollow } = useSearch();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
   return (
     <Card p={2} mt={2}>

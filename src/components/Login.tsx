@@ -17,32 +17,6 @@ import { useLogin } from "../features/auth/hooks/useLogin";
 
 export default function Login() {
   const { handleChange, handleSubmit } = useLogin();
-  // // console.log(`auth`, auth);
-  // // console.log(`handleChange`, handleChange);
-  // const navigate = useNavigate();
-  // const [isMessage, setIsMessage] = useState<string>();
-  // const formik = useFormik({
-  //   initialValues: {
-  //     email: "",
-  //     password: "",
-  //   },
-  //   onSubmit: async () => {
-  //     try {
-  //       const response = await axiosInstance.post("/login", formik.values);
-  //       // console.log(response);
-  //       localStorage.setItem("token", response.data.token);
-  //       const user = jwtDecode(response.data.token);
-  //       console.log(`user`, user);
-  //       dispatch(AUTH_LOGIN(user));
-  //       if (response.data.token) {
-  //         navigate("/");
-  //       }
-  //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //     } catch (error: any) {
-  //       setIsMessage(error.response.data.message);
-  //     }
-  //   },
-  // });
 
   return (
     <Container
@@ -66,52 +40,52 @@ export default function Login() {
         {/* <form
         // onSubmit={formik.handleSubmit}
         > */}
-          {/* {isMessage && (
-            <Box>
-              <Text fontSize={13} textAlign={"center"} textColor={"red"}>
-                {isMessage}
-              </Text>
-            </Box>
-          )} */}
-          <Flex direction={"column"} gap={2} mt={2}>
-            <Input
-              borderColor={"black"}
-              placeholder="email"
-              name="email"
-              onChange={handleChange}
-              // value={formik.values.email}
-            />
-            <Input
-              borderColor={"black"}
-              placeholder="password"
-              name="password"
-              onChange={handleChange}
-              // value={formik.values.password}
-            />
-          </Flex>
-          <Text textAlign={"right"} fontSize="13px" my={1}>
-            Forgot password?
-          </Text>
-          <Button
-            w={"full"}
-            type="submit"
-            onClick={handleSubmit}
-            bg={"green"}
-            textColor={"white"}
+        {/* {isMessage && (
+          <Box>
+            <Text fontSize={13} textAlign={"center"} textColor={"red"}>
+              {isMessage}
+            </Text>
+          </Box>
+        )} */}
+        <Flex direction={"column"} gap={2} mt={2}>
+          <Input
+            borderColor={"black"}
+            placeholder="email"
+            name="email"
+            onChange={handleChange}
+            // value={formik.values.email}
+          />
+          <Input
+            borderColor={"black"}
+            placeholder="password"
+            name="password"
+            onChange={handleChange}
+            // value={formik.values.password}
+          />
+        </Flex>
+        <Text textAlign={"right"} fontSize="13px" my={1}>
+          Forgot password?
+        </Text>
+        <Button
+          w={"full"}
+          type="submit"
+          onClick={handleSubmit}
+          bg={"green"}
+          textColor={"white"}
+        >
+          Login
+        </Button>
+        <Flex fontSize="13px" mt={1} gap="2px">
+          <Text>Don't have an account?</Text>
+          <ChakraLink
+            as={ReactRouterLink}
+            to={"/register"}
+            color={"green"}
+            textDecoration={"underline"}
           >
-            Login
-          </Button>
-          <Flex fontSize="13px" mt={1} gap="2px">
-            <Text>Don't have an account?</Text>
-            <ChakraLink
-              as={ReactRouterLink}
-              to={"/register"}
-              color={"green"}
-              textDecoration={"underline"}
-            >
-              Create Account
-            </ChakraLink>
-          </Flex>
+            Create Account
+          </ChakraLink>
+        </Flex>
         {/* </form> */}
       </Card>
     </Container>

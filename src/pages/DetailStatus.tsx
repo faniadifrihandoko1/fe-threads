@@ -15,18 +15,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/type/RootState";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { IThread } from "../types/thread";
-import { getThread } from "../store/redux/createAsync";
+import { getThread } from "../store/asyncThunk/createAsync";
 
 const DetailStatus: React.FC = () => {
   // const { data } = useFetchThread();
   // console.log("detailstatus", data);
-  const data = useSelector((state: RootState) => state.user);
+  const data = useSelector((state: RootState) => state.threads);
   const userId = useSelector((state: RootState) => state.auth.id);
   const { id } = useParams();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  const filterData = data.user?.filter(
+  const filterData = data.threads?.filter(
     (item: IThread) => item.id === Number(id)
   );
 

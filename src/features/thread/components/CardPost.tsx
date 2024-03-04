@@ -9,9 +9,11 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
-import { FaEllipsisH, FaRegHeart, FaRegTrashAlt, FaEdit } from "react-icons/fa";
+import { FaEllipsisH, FaRegHeart } from "react-icons/fa";
 import { BiMessageAltDetail } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
+import { GoReport } from "react-icons/go";
+import { MdBlock } from "react-icons/md";
 
 import { Link } from "react-router-dom";
 import convertTimeToAgo from "../../../utils/convertTime";
@@ -20,38 +22,23 @@ import { IThread } from "../../../types/thread";
 import { RootState } from "../../../store/type/RootState";
 
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { getThread } from "../../../store/redux/createAsync";
+import { getThread } from "../../../store/asyncThunk/createAsync";
 
-import { axiosInstance } from "../../../lib/axios";
 import useThreads from "../hooks/useThread";
 
 const CardPost: React.FC = () => {
   const [modals, setModals] = useState<{ [key: number]: boolean }>({});
   const userId = useSelector((state: RootState) => state.auth.id);
   const { handleLike } = useThreads();
-  const data = useSelector((state: RootState) => state.user);
+  const data = useSelector((state: RootState) => state.threads);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  const fetch = async () => {
-    const response = await axiosInstance.get("/thread");
-    return response.data;
-  };
 
   useEffect(() => {
     dispatch(getThread(userId));
-    fetch();
-  }, [dispatch]);
+  }, []);
 
-  // const handleLike = () => {
-  //   if (!liked) {
-  //     setLiked(true);
-  //     setCountLike(countLike + 1);
-  //   } else {
-  //     setLiked(false);
-  //     setCountLike(countLike - 1);
-  //   }
-  // };
   const handleModal = (id: number) => {
     setModals((prevModals) => ({
       ...prevModals,
@@ -61,7 +48,7 @@ const CardPost: React.FC = () => {
 
   return (
     <>
-      {data.user?.map((item: IThread, key: number) => (
+      {data.threads?.map((item: IThread, key: number) => (
         <Card mt={2} p={4} position={"relative"} key={key}>
           <Box>
             <Flex gap={4}>
@@ -127,6 +114,7 @@ const CardPost: React.FC = () => {
               <Box
                 ml="auto"
                 mr={4}
+                _hover={{ cursor: "pointer" }}
                 // {...modals[item.id] ? { display: "block" } : { display: "none" }}
               >
                 <FaEllipsisH onClick={() => handleModal(item.id)} />
@@ -134,7 +122,7 @@ const CardPost: React.FC = () => {
               {modals[item.id] && (
                 <Box
                   position={"absolute"}
-                  w={"85px"}
+                  w={"100px"}
                   bg={"darkgray"}
                   shadow={10}
                   rounded={5}
@@ -143,31 +131,54 @@ const CardPost: React.FC = () => {
                   py={1}
                   right={7}
                 >
-                  <Button
+                  <Flex
+                    _hover={{
+                      cursor: "pointer",
+                      color: "red",
+                      borderRadius: "5px",
+                      boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+                    }}
                     w={"100%"}
                     rounded={5}
                     display={"flex"}
-                    alignItems={"center"}
                     bg={"white"}
-                    textColor={"black"}
+                    textColor={"white"}
+                    justifyContent={"space-between"}
+                    align={"center"}
+                    alignItems={"center"}
                     fontWeight={"bold"}
-                    justifyContent={"center"}
-                    h={"30px"}
+                    px={2}
+                    py={1}
                   >
-                    <FaEdit />
-                  </Button>
-                  <Button
-                    h={"30px"}
-                    w={"100%"}
+                    <Text fontSize={12} color={"red"} fontWeight={"regular"}>
+                      Laporkan
+                    </Text>
+                    <GoReport size={14} color="red" />
+                  </Flex>
+                  <Flex
+                    _hover={{
+                      cursor: "pointer",
+                      color: "red",
+                      borderRadius: "5px",
+                      boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+                    }}
                     mt={1}
+                    w={"100%"}
                     rounded={5}
                     display={"flex"}
-                    alignItems={"center"}
-                    bg={"red"}
+                    bg={"white"}
                     textColor={"white"}
+                    justifyContent={"space-between"}
+                    alignItems={"center"}
+                    fontWeight={"bold"}
+                    px={2}
+                    py={1}
                   >
-                    <FaRegTrashAlt />
-                  </Button>
+                    <Text fontSize={12} color={"red"}>
+                      Blokir
+                    </Text>
+                    <MdBlock size={14} color="red" />
+                  </Flex>
                 </Box>
               )}
             </Flex>

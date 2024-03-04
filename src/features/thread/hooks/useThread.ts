@@ -5,7 +5,7 @@ import { IPostThread } from "../../../types/thread";
 // import { createThread, getThread } from "../../../store/slices/Test";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { createThread, getThread } from "../../../store/redux/createAsync";
+import { createThread, getThread } from "../../../store/asyncThunk/createAsync";
 import { axiosInstance } from "../../../lib/axios";
 import { RootState } from "../../../store/type/RootState";
 // import { RootState } from "../../../store/type/RootState";
@@ -69,7 +69,7 @@ function useThreads() {
       // dispatch(likeThread(threadId));
       dispatch(getThread(userId));
     } catch (error) {
-      console.log(error);
+      throw new Error("Failed to like thread");
     }
   };
   return {

@@ -4,7 +4,7 @@ import { IPostThread } from "../../../types/thread";
 import { axiosInstance } from "../../../lib/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { getThread } from "../../../store/redux/createAsync";
+import { getThread } from "../../../store/asyncThunk/createAsync";
 import { RootState } from "../../../store/type/RootState";
 
 export default function useReply() {
@@ -35,7 +35,7 @@ export default function useReply() {
     const formData = new FormData();
     formData.append("content", data.content as string);
     formData.append("image", data.image as File);
-    console.log(data);
+
     try {
       const response = await axiosInstance.post(
         `/thread/reply/${id}`,
@@ -45,7 +45,7 @@ export default function useReply() {
       //   dispatch(createReply(formData));
       console.log(response);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   return {
