@@ -12,7 +12,7 @@ export default function useFollow() {
       const response = await axiosInstance.get("/user/follow?type=follower");
       setFollower(response.data.data);
     } catch (error) {
-      console.log(`fetch follower`, error);
+      // console.log(`fetch follower`, error);
     }
   };
 
@@ -21,12 +21,11 @@ export default function useFollow() {
       const response = await axiosInstance.get("/user/follow?type=following");
       setFollowing(response.data.data);
     } catch (error) {
-      console.log(`fetch following`, error);
+      // console.log(`fetch following`, error);
     }
   };
 
   const handleFollow = async (idFollow: number) => {
-    console.log(idFollow);
     try {
       const response = await axiosInstance.post(
         `/user/follow?following=${idFollow}`
@@ -36,7 +35,7 @@ export default function useFollow() {
       fetchSuggest();
       console.log(`response handleFollow`, response);
     } catch (error) {
-      console.log(`handle Follow`, error);
+      // console.log(`handle Follow`, error);
     }
   };
 
