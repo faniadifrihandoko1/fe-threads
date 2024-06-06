@@ -7,10 +7,15 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
-import { RiHome7Fill } from "react-icons/ri";
-import { MdPersonSearch } from "react-icons/md";
-import { FaRegHeart } from "react-icons/fa";
-import { CgProfile } from "react-icons/cg";
+import { GoHome, GoHomeFill } from "react-icons/go";
+
+import { MdOutlinePersonSearch, MdPersonSearch } from "react-icons/md";
+import {
+  IoHeartOutline,
+  IoHeartSharp,
+  IoPersonOutline,
+  IoPersonSharp,
+} from "react-icons/io5";
 import { TbLogout2 } from "react-icons/tb";
 import logo from "../assets/logo.svg";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -35,10 +40,11 @@ export default function Sidebar() {
       py="15"
       borderRight={2}
       borderEnd="black"
-      position={{ base: "relative", md: "fixed" }}
-      w={{ base: "", md: "19%" }}
+      position="fixed"
+      bottom={{ base: 0, md: "auto" }}
+      w={{ base: "100%", md: "19%" }}
     >
-      <Box px="30px" w="full">
+      <Box px="10px" w="full">
         <Flex
           direction={{ base: "row", md: "column" }}
           justifyContent="space-around"
@@ -50,49 +56,78 @@ export default function Sidebar() {
             <Image w="40px" ml={1} mt={2} src={logo} />
           </Flex>
 
-          <Box mt="10px">
+          <Box>
             <NavLink to={"/"}>
-              <Button alignItems="center" gap="3" bg="transparent">
-                <RiHome7Fill size={25} />
-                <Text
-                  fontWeight="semibold"
-                  display={{ base: "none", md: "block" }}
-                >
-                  Home
-                </Text>
-              </Button>
+              {({ isActive }) => (
+                <Button alignItems="center" gap="3" bg="transparent">
+                  {isActive ? <GoHomeFill size={25} /> : <GoHome size={25} />}
+                  <Text
+                    fontWeight={isActive ? "bold" : "semibold"}
+                    display={{ base: "none", md: "block" }}
+                  >
+                    Home
+                  </Text>
+                </Button>
+              )}
             </NavLink>
           </Box>
-          <Box mt="10px">
+          <Box>
             <NavLink to={"/search"}>
-              <Button alignItems="center" gap="3" bg="transparent">
-                <MdPersonSearch size={25} />
-                <Text
-                  fontWeight="semibold"
-                  display={{ base: "none", md: "block" }}
-                >
-                  Search
-                </Text>
-              </Button>
+              {({ isActive }) => (
+                <Button alignItems="center" gap="3" bg="transparent">
+                  {isActive ? (
+                    <MdPersonSearch size={25} />
+                  ) : (
+                    <MdOutlinePersonSearch size={25} />
+                  )}
+                  <Text
+                    fontWeight={isActive ? "bold" : "semibold"}
+                    display={{ base: "none", md: "block" }}
+                  >
+                    Search
+                  </Text>
+                </Button>
+              )}
             </NavLink>
           </Box>
-          <Box mt="10px">
+          <Box>
             <NavLink to={"/follows"}>
-              <Button alignItems="center" gap="3" bg="transparent">
-                <FaRegHeart size={25} />
-                <Text
-                  fontWeight="semibold"
-                  display={{ base: "none", md: "block" }}
-                >
-                  Follows
-                </Text>
-              </Button>
+              {({ isActive }) => (
+                <Button alignItems="center" gap="3" bg="transparent">
+                  {isActive ? (
+                    <IoHeartSharp size={25} />
+                  ) : (
+                    <IoHeartOutline size={25} />
+                  )}
+                  <Text
+                    fontWeight={isActive ? "bold" : "semibold"}
+                    display={{ base: "none", md: "block" }}
+                  >
+                    Follows
+                  </Text>
+                </Button>
+              )}
             </NavLink>
           </Box>
 
-          <Box mt="10px">
+          <Box>
             <NavLink to={"/profile"}>
-              <Button alignItems="center" gap="3" bg="transparent">
+              {({ isActive }) => (
+                <Button alignItems="center" gap="3" bg="transparent">
+                  {isActive ? (
+                    <IoPersonSharp size={25} />
+                  ) : (
+                    <IoPersonOutline size={25} />
+                  )}
+                  <Text
+                    fontWeight={isActive ? "bold" : "semibold"}
+                    display={{ base: "none", md: "block" }}
+                  >
+                    Profile
+                  </Text>
+                </Button>
+              )}
+              {/* <Button alignItems="center" gap="3" bg="transparent">
                 <CgProfile size={25} />
                 <Text
                   fontWeight="semibold"
@@ -100,7 +135,7 @@ export default function Sidebar() {
                 >
                   Profile
                 </Text>
-              </Button>
+              </Button> */}
             </NavLink>
           </Box>
 

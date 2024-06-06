@@ -1,20 +1,42 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import { IPostThread } from "../../../types/thread";
 import { axiosInstance } from "../../../lib/axios";
-import { useDispatch, useSelector } from "react-redux";
-import { ThunkDispatch } from "@reduxjs/toolkit";
-import { getThread } from "../../../store/asyncThunk/createAsync";
-import { RootState } from "../../../store/type/RootState";
+import {
+  getThread,
+  getThreadById,
+} from "../../../store/asyncThunk/createAsync";
+import { useAppDispatch, useAppSelector } from "../../../store/type/RootState";
+import { useParams } from "react-router-dom";
 
 export default function useReply() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  const userId = useSelector((state: RootState) => state.auth.id);
+  const dispatch = useAppDispatch();
+  const userId = useAppSelector((state) => state.auth.id);
+  const { id } = useParams();
+  const threadId = Number(id);
+  const dataThreadById = useAppSelector((state) => state.threadById.threadById);
+  // const [dataThreadById, setDataThreadById] = useState<IThread>();
   const [data, setData] = useState<IPostThread>({
     content: "",
     image: null,
   });
+
+  // const getThreadById = async () => {
+  //   try {
+  //     const response = await axiosInstance.get(`/thread/${id}?id=${userId}`);
+  //     setDataThreadById(response.data);
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  useEffect(() => {
+    // getThreadById();
+    dispatch(getThreadById({ threadId, userId }));
+    dispatch(getThread(userId));
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
@@ -35,15 +57,15 @@ export default function useReply() {
     const formData = new FormData();
     formData.append("content", data.content as string);
     formData.append("image", data.image as File);
-    console.log(data);
+    console.log(`form`, FormData);
     try {
       const response = await axiosInstance.post(
         `/thread/reply/${id}`,
         formData
       );
+      console.log(`response useReply`, response);
+
       dispatch(getThread(userId));
-      //   dispatch(createReply(formData));
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -51,5 +73,7 @@ export default function useReply() {
   return {
     handleChange,
     handleSubmit,
+    dataThreadById,
+    getThreadById,
   };
 }

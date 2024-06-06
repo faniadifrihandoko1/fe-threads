@@ -3,8 +3,8 @@ export type IThread = {
   id: number;
   content: string;
   image?: string;
-  created_at: string;
-  updated_at: string;
+  created_at?: string | undefined;
+  updated_at?: string | undefined;
   user?: IUser;
   reply?: IReply[];
   like?: ILike[];

@@ -1,21 +1,27 @@
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Login from "./features/auth/components/Login";
+import Register from "./features/auth/components/Register";
 import DetailStatus from "./pages/DetailStatus";
 import Home from "./pages/Home";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import ProfileEdit from "./pages/ProfileEdit";
 import { axiosInstance, setAuthToken } from "./lib/axios";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AUTH_CHECK } from "./store/rootRecuder";
 import FollowPage from "./pages/FollowPage";
 
 import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
+import { RootState } from "./store/type/RootState";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { getThread } from "./store/asyncThunk/createAsync";
 
 function App() {
   const dispatch = useDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatchThunk = useDispatch<ThunkDispatch<any, any, any>>();
   const navigate = useNavigate();
+  const userId = useSelector((state: RootState) => state.auth.id);
   async function check() {
     try {
       setAuthToken(localStorage.token);
@@ -32,8 +38,10 @@ function App() {
       navigate("/login");
     } else {
       check();
+      dispatchThunk(getThread(userId));
     }
   }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

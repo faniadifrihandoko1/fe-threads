@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import { useFetchLoginProps } from "./useFetchLogin";
-import { axiosInstance } from "../../lib/axios";
+import { axiosInstance } from "../../../lib/axios";
 import { useNavigate } from "react-router-dom";
 
 export const useFetchRegister = ({ onError }: useFetchLoginProps) => {

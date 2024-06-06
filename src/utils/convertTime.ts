@@ -10,12 +10,18 @@ export default function convertTimeToAgo(timestamp: any) {
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(months / 12);
 
-  if (days > 0) {
-    return days + " hari yang lalu";
+  if (years > 0) {
+    return years === 1 ? "1 tahun yang lalu" : years + " tahun yang lalu";
+  } else if (months > 0) {
+    return months === 1 ? "1 bulan yang lalu" : months + " bulan yang lalu";
+  } else if (days > 0) {
+    return days === 1 ? "1 hari yang lalu" : days + " hari yang lalu";
   } else if (hours > 0) {
-    return hours + " jam yang lalu";
+    return hours === 1 ? "1 jam yang lalu" : hours + " jam yang lalu";
   } else {
-    return minutes + " menit yang lalu";
+    return minutes === 1 ? "1 menit yang lalu" : minutes + " menit yang lalu";
   }
 }

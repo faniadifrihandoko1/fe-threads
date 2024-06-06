@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Card,
   Flex,
   Heading,
@@ -9,26 +10,24 @@ import {
   Skeleton,
   Text,
 } from "@chakra-ui/react";
+
+import { IThread } from "../../../types/thread";
+import convertTimeToAgo from "../../../utils/convertTime";
+import { Link } from "react-router-dom";
 import { FaEllipsisH, FaRegHeart } from "react-icons/fa";
 import { BiMessageAltDetail } from "react-icons/bi";
-import React from "react";
-import { GoReport } from "react-icons/go";
-import { MdBlock } from "react-icons/md";
-import { Link } from "react-router-dom";
-import convertTimeToAgo from "../../../utils/convertTime";
-import { IThread } from "../../../types/thread";
+import { MdDeleteForever } from "react-icons/md";
+import useMyThreads from "../hooks/useMyThread";
 
-import useThreads from "../hooks/useThread";
-
-const CardPost: React.FC = () => {
-  const { handleLike, handleModal, modals, dataThread, isloadingThread } =
-    useThreads();
+export default function MyThread() {
+  const { handleDelete, handleModal, modals, mappedThread, isloading } =
+    useMyThreads();
 
   return (
     <>
-      {dataThread.threads?.map((item: IThread, key: number) => (
-        <Skeleton isLoaded={isloadingThread}>
-          <Card mt={2} p={4} position={"relative"} key={key}>
+      {mappedThread.map((item: IThread, key: number) => (
+        <Skeleton isLoaded={isloading}>
+          <Card my={2} p={4} position={"relative"} key={key}>
             <Box>
               <Flex gap={4}>
                 <Box>
@@ -64,48 +63,38 @@ const CardPost: React.FC = () => {
                   <Link to={`detail-status/${item.id}`}>
                     <Text fontSize={15}>{item.content}</Text>
                   </Link>
-                  {!!item.image && (
-                    <Image
-                      mt={"5px"}
-                      borderRadius={"10px"}
-                      src={item.image}
-                    ></Image>
-                  )}
-                  <Flex gap={5} mt={2} alignItems="center">
-                    <Text
+                  {!!item.image && <Image src={item.image}></Image>}
+                  <Flex gap={2} mt={2} alignItems="center">
+                    <Button
                       // onClick={handleLike}
                       bg="white"
                     >
-                      <Flex
-                        gap={1}
-                        alignItems="center"
-                        _hover={{ cursor: "pointer" }}
-                      >
+                      <Flex gap={2}>
                         <FaRegHeart
-                          onClick={() => {
-                            handleLike(item.id);
-                          }}
+                          // onClick={() => {
+                          //   handleLike(item.id);}
+                          // }
                           color={item.isLiked ? "red" : "gray"}
                           size={18}
                         />
-                        <Text color="gray" fontSize={15} mb={"2px"}>
+                        <Text color="gray" fontSize={14}>
                           {item.like_count}
                         </Text>
                       </Flex>
-                    </Text>
+                    </Button>
                     <Link to={`detail-status/${item.id}`}>
-                      <Text bg="white" pt={"2px"}>
-                        <Flex gap={1} alignItems="center">
+                      <Button bg="white" pt={"2px"}>
+                        <Flex gap={2}>
                           <BiMessageAltDetail color="gray" size={20} />
-                          <Text color="gray" fontSize={15} mb={1}>
+                          <Text color="gray" marginTop="0px" fontSize={14}>
                             {item.reply_count} Replies
                           </Text>
                         </Flex>
-                      </Text>
+                      </Button>
                     </Link>
                   </Flex>
                 </Box>
-                <Box ml="auto" _hover={{ cursor: "pointer" }} mr={4}>
+                <Box ml="auto" mr={4}>
                   <FaEllipsisH onClick={() => handleModal(item.id)} />
                 </Box>
                 {modals[item.id] && (
@@ -138,38 +127,54 @@ const CardPost: React.FC = () => {
                       fontWeight={"bold"}
                       px={2}
                       py={1}
+                      onClick={() => handleDelete(item.id)}
                     >
                       <Text fontSize={12} color={"red"} fontWeight={"regular"}>
-                        Laporkan
+                        delete
                       </Text>
-                      <GoReport size={14} color="red" />
-                    </Flex>
-                    <Flex
-                      _hover={{
-                        cursor: "pointer",
-                        color: "red",
-                        borderRadius: "5px",
-                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
-                      }}
-                      mt={1}
-                      w={"100%"}
-                      rounded={5}
-                      display={"flex"}
-                      bg={"white"}
-                      textColor={"white"}
-                      justifyContent={"space-between"}
-                      alignItems={"center"}
-                      fontWeight={"bold"}
-                      px={2}
-                      py={1}
-                    >
-                      <Text fontSize={12} color={"red"}>
-                        Blokir
-                      </Text>
-                      <MdBlock size={14} color="red" />
+                      <MdDeleteForever size={14} color="red" />
                     </Flex>
                   </Box>
                 )}
+                {/* {modals[item.id] && (
+                <Box
+                  position={"absolute"}
+                  w={"85px"}
+                  bg={"darkgray"}
+                  shadow={10}
+                  rounded={5}
+                  top={7}
+                  px={1}
+                  py={1}
+                  right={7}
+                >
+                  <Button
+                    w={"100%"}
+                    rounded={5}
+                    display={"flex"}
+                    alignItems={"center"}
+                    bg={"white"}
+                    textColor={"black"}
+                    fontWeight={"bold"}
+                    justifyContent={"center"}
+                    h={"30px"}
+                  >
+                    <FaEdit />
+                  </Button>
+                  <Button
+                    h={"30px"}
+                    w={"100%"}
+                    mt={1}
+                    rounded={5}
+                    display={"flex"}
+                    alignItems={"center"}
+                    bg={"red"}
+                    textColor={"white"}
+                  >
+                    <FaRegTrashAlt />
+                  </Button>
+                </Box>
+              )} */}
               </Flex>
             </Box>
           </Card>
@@ -177,6 +182,4 @@ const CardPost: React.FC = () => {
       ))}
     </>
   );
-};
-
-export default CardPost;
+}

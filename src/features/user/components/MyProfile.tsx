@@ -7,18 +7,17 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import bgProfile from "../assets/background-profile.jpg";
+import bgProfile from "../../../assets/background-profile.jpg";
 import React from "react";
-import { userProps } from "../types/cardType";
+import { userProps } from "../../../types/cardType";
 import { useSelector } from "react-redux";
-import { RootState } from "../store/type/RootState";
+import { RootState } from "../../../store/type/RootState";
 import { Link } from "react-router-dom";
 
 const MyProfile: React.FC<userProps> = () => {
   const boxBg = useColorModeValue("white !important", "#111c44 !important");
   const mainText = useColorModeValue("gray.800", "white");
   const user = useSelector((state: RootState) => state.auth);
-  console.log(`my profile`, user);
 
   return (
     <Card my={2}>
@@ -33,7 +32,12 @@ const MyProfile: React.FC<userProps> = () => {
         <Text my={1} fontSize={18} fontWeight="bold">
           My Profile
         </Text>
-        <Image src={bgProfile} maxW="100%" h={"100px"} borderRadius="20px" />
+        <Image
+          src={user.photo_cover ? user.photo_cover : bgProfile}
+          maxW="100%"
+          h={"100px"}
+          borderRadius="20px"
+        />
         <Flex w="full">
           <Flex flexDirection="column" mb="30px" w="full" px={4}>
             <Image
@@ -69,14 +73,14 @@ const MyProfile: React.FC<userProps> = () => {
           <Flex gap={4} alignItems="center">
             <Flex alignItems="center" gap="2px">
               <Text fontWeight="bold" fontSize={"15px"}>
-                {user.following_count ? user.following_count : 0}
+                {user.follower_count ? user.follower_count : 0}
               </Text>
               <Text fontSize="14px">Following</Text>
             </Flex>
 
             <Flex alignItems="center" gap="2px">
               <Text fontWeight="bold" fontSize={"15px"}>
-                {user.follower_count ? user.follower_count : 0}
+                {user.following_count ? user.following_count : 0}
               </Text>
               <Text fontSize="14px" color={mainText}>
                 Follower

@@ -10,11 +10,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import logo from "../assets/logo.svg";
+import logo from "../../../assets/logo.svg";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { useFormik } from "formik";
-import { useFetchRegister } from "../features/auth/useFetchRegister";
+import { useFetchRegister } from "../hooks/useFetchRegister";
 
 const Register: React.FC = () => {
   const [isMessage, setIsMessage] = useState<string>("");

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 export function useLogin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [message, setMessage] = useState("");
   const [form, setForm] = useState<IUserLogin>({
     email: "",
     password: "",
@@ -25,21 +26,19 @@ export function useLogin() {
 
   async function handleSubmit() {
     try {
-      // console.log(form);
       const response = await axiosInstance.post("/login", form);
-      // console.log(`response `, response);
-      // console.log(response.data.token);
-      // const user = jwtDecode(response.data.token);
       dispatch(AUTH_LOGIN(response.data.token));
       navigate("/");
-
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+
+      setMessage(error.response.data.message);
     }
   }
   return {
     handleChange,
     handleSubmit,
+    message,
   };
 }

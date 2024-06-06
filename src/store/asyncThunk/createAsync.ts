@@ -6,11 +6,24 @@ export const getThread = createAsyncThunk(
   async (userId: number) => {
     try {
       const response = await axiosInstance.get(`/thread?id=${userId}`);
-
+      console.log("asynthunk", response.data);
       return response.data;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: Error | any) {
       return isRejectedWithValue(error.response.data);
+    }
+  }
+);
+
+export const getThreadById = createAsyncThunk(
+  "ThreadById",
+  async ({ threadId, userId }: { threadId: number; userId: number }) => {
+    try {
+      const response = await axiosInstance.get(`/thread/${threadId}?id=${userId}`);
+      return response.data; // Mengembalikan data dari respons
+    } catch (error) {
+      console.log(error);
+      throw error; // Melemparkan error agar dapat ditangani oleh pemanggil fungsi
     }
   }
 );
@@ -62,6 +75,17 @@ export const likeThread = createAsyncThunk(
 export const getAllUser = createAsyncThunk("getAllUser", async () => {
   try {
     const response = await axiosInstance.get("/user/follow?type=allUser");
+    return response.data.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: Error | any) {
+    return isRejectedWithValue(error.response.data);
+  }
+});
+
+export const getSuggest = createAsyncThunk("suggest", async () => {
+  try {
+    const response = await axiosInstance.get(`/user/follow?type=sugestion`);
+    console.log("asynthunk", response.data.data);
     return response.data.data;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: Error | any) {

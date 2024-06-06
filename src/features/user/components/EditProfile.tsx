@@ -1,12 +1,15 @@
-import { Avatar, Box, Button, Card, Flex, Input, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box, Button, Card, Flex, Image, Input, Text } from "@chakra-ui/react";
+import React, {  useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { NavLink } from "react-router-dom";
-import { useUpdateUser } from "../features/user/hooks/useUpdateUser";
+import { useUpdateUser } from "../hooks/useUpdateUser";
 import { TiPencil } from "react-icons/ti";
 
 const EditProfile: React.FC = () => {
   const { handleChange, handleSubmit, form } = useUpdateUser();
+
+  // const [showInput, setShowInput] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <>
       <Card pt={4} mt={2}>
@@ -16,16 +19,65 @@ const EditProfile: React.FC = () => {
           </NavLink>
 
           <Text my={1} fontSize={18} fontWeight="bold">
-            Status
+            Edit Profile
           </Text>
         </Flex>
         <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
-          <Box position={"relative"}>
+          <Image
+            src={
+              typeof form.photo_cover === "string"
+                ? form.photo_cover
+                  ? form.photo_cover
+                  : undefined
+                : "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+            }
+            maxW="100%"
+            w={"90%"}
+            h={"200px"}
+            borderRadius="20px"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            style={{
+              filter: isHovered ? "brightness(40%)" : "brightness(100%)",
+            }}
+          />
+          <label htmlFor="photo_cover">
+            <Box
+              display={isHovered ? "block" : "none"}
+              position="absolute"
+              border={"1px solid white"}
+              borderRadius={"50%"}
+              p={2}
+              bg={"white"}
+              top="25%"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              zIndex={999}
+            >
+              <TiPencil size={40} />
+            </Box>
+          </label>
+          <input
+            accept="image/*"
+            style={{ display: "none" }}
+            id="photo_cover"
+            name="photo_cover"
+            type="file"
+            onChange={handleChange}
+          />
+          <Box position={"relative"} bottom={"40px"}>
             <label htmlFor="profile-picture">
-              <Avatar
-                name="Dan Abrahmov"
-                size="xl"
-                src={form.photo_profile}
+              <Image
+                border="5px solid "
+                borderColor={"white !important"}
+                width="68px"
+                height="68px"
+                borderRadius="50%"
+                src={
+                  typeof form.photo_profile === "string"
+                    ? form.photo_profile
+                    : undefined
+                }
                 _hover={{
                   cursor: "pointer",
                   filter: "grayscale(100%)",
@@ -56,7 +108,6 @@ const EditProfile: React.FC = () => {
             type="file"
             onChange={handleChange}
           />
-          <Text variant="outlined">Change Profile Photo</Text>
         </Box>
         <Box
           display={"flex"}
@@ -65,7 +116,6 @@ const EditProfile: React.FC = () => {
           borderTop={"1px solid darkgray"}
           px={5}
           py={2}
-          mt={5}
         >
           <Text w={"20%"}>Username</Text>
           <Input
