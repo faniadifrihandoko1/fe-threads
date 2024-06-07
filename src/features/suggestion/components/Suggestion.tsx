@@ -14,7 +14,12 @@ import shortUsername from "../../../utils/shortUsername";
 const CardFollow: React.FC = () => {
   const { handleFollow, suggest, isloading } = useSuggestion();
   return (
-    <Card my={2} px="20px" py="10px">
+    <Card
+      my={2}
+      px="20px"
+      py="10px"
+      display={suggest.length > 0 ? "block" : "none"}
+    >
       <Text my={2} fontSize={18} fontWeight="bold">
         Suggested For You
       </Text>

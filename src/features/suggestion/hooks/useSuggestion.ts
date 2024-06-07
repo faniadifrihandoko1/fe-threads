@@ -11,25 +11,22 @@ export default function useSuggestion() {
   const fetchSuggest = async () => {
     try {
       const response = await axiosInstance.get(
-        "/user/follow?type=sugestion&limit=5"
+        "/follow?type=sugestion&limit=5"
       );
       setSuggest(response.data.data);
       setIsloading(true);
     } catch (error) {
-      console.log(`error`, error);
+      console.log(`error in fetch suggest`, error);
     }
   };
 
   const handleFollow = async (userId: number) => {
     try {
-      const response = await axiosInstance.post(
-        `/user/follow?following=${userId}`
-      );
-      console.log(response);
+      await axiosInstance.post(`/follow?following=${userId}`);
       check();
       fetchSuggest();
     } catch (error) {
-      console.log(`error`, error);
+      console.log(`error in handle follow`, error);
     }
   };
 

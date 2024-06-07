@@ -15,6 +15,7 @@ import ProfilePage from "./pages/ProfilePage";
 import { RootState } from "./store/type/RootState";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { getThread } from "./store/asyncThunk/createAsync";
+import OtherProfile from "./pages/OtherProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
       <Route path="/follows" element={<FollowPage />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/profile/:username" element={<OtherProfile />} />
       <Route path="/detail-status/:id" element={<DetailStatus />} />
       <Route path="/edit-profile/:id" element={<ProfileEdit />} />
       <Route path="/register" element={<Register />} />

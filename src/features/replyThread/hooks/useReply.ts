@@ -16,24 +16,12 @@ export default function useReply() {
   const { id } = useParams();
   const threadId = Number(id);
   const dataThreadById = useAppSelector((state) => state.threadById.threadById);
-  // const [dataThreadById, setDataThreadById] = useState<IThread>();
   const [data, setData] = useState<IPostThread>({
     content: "",
     image: null,
   });
 
-  // const getThreadById = async () => {
-  //   try {
-  //     const response = await axiosInstance.get(`/thread/${id}?id=${userId}`);
-  //     setDataThreadById(response.data);
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   useEffect(() => {
-    // getThreadById();
     dispatch(getThreadById({ threadId, userId }));
     dispatch(getThread(userId));
   }, []);
@@ -57,17 +45,11 @@ export default function useReply() {
     const formData = new FormData();
     formData.append("content", data.content as string);
     formData.append("image", data.image as File);
-    console.log(`form`, FormData);
     try {
-      const response = await axiosInstance.post(
-        `/thread/reply/${id}`,
-        formData
-      );
-      console.log(`response useReply`, response);
-
+      await axiosInstance.post(`/thread/reply/${id}`, formData);
       dispatch(getThread(userId));
     } catch (error) {
-      console.log(error);
+      console.log("error reply", error);
     }
   };
   return {

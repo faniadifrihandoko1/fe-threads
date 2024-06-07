@@ -6,7 +6,7 @@ import { ThunkDispatch } from "@reduxjs/toolkit";
 import { getThread } from "../../../store/asyncThunk/createAsync";
 import { IThread } from "../../../types/thread";
 
-function useMyThreads() {
+function useMyThreads(username: string | undefined) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const thread = useSelector((state: RootState) => state.threads.threads);
@@ -15,7 +15,7 @@ function useMyThreads() {
   const [modals, setModals] = useState<{ [key: number]: boolean }>({});
 
   const mappedThread = thread.filter((item: IThread) => {
-    return item.user?.id === userId;
+    return item.user?.username === username;
   });
 
   const handleModal = (id: number) => {
@@ -31,7 +31,7 @@ function useMyThreads() {
       console.log(response);
       dispatch(getThread(userId));
     } catch (error) {
-      console.log(error);
+      console.log("error in handle delete", error);
     }
   };
 

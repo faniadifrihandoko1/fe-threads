@@ -8,6 +8,7 @@ export const useFetchRegister = ({ onError }: useFetchLoginProps) => {
   return useMutation({
     mutationFn: async (body: {
       fullName: string;
+      username: string;
       email: string;
       password: string;
     }) => {

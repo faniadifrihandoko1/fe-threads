@@ -21,14 +21,15 @@ const Register: React.FC = () => {
   const formik = useFormik({
     initialValues: {
       fullName: "",
+      username: "",
       email: "",
       password: "",
     },
     onSubmit: () => {
       console.log(formik.values);
       formik.resetForm();
-      const { fullName, email, password } = formik.values;
-      mutate({ fullName, email, password });
+      const { fullName, username, email, password } = formik.values;
+      mutate({ fullName, username, email, password });
     },
   });
 
@@ -72,11 +73,19 @@ const Register: React.FC = () => {
             />
             <Input
               borderColor={"black"}
+              placeholder="username"
+              name="username"
+              onChange={formik.handleChange}
+              value={formik.values.username}
+            />
+            <Input
+              borderColor={"black"}
               placeholder="email"
               name="email"
               onChange={formik.handleChange}
               value={formik.values.email}
             />
+
             <Input
               borderColor={"black"}
               placeholder="password"

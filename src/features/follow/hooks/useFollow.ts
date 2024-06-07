@@ -13,36 +13,33 @@ export default function useFollow() {
 
   const fetchFollower = async () => {
     try {
-      const response = await axiosInstance.get("/user/follow?type=follower");
+      const response = await axiosInstance.get("/follow?type=follower");
       setFollower(response.data.data);
       setIsloadingFollower(true);
     } catch (error) {
-      // console.log(`fetch follower`, error);
+      console.log(`fetch follower`, error);
     }
   };
 
   const fetchFollowing = async () => {
     try {
-      const response = await axiosInstance.get("/user/follow?type=following");
+      const response = await axiosInstance.get("/follow?type=following");
       setFollowing(response.data.data);
       setIsloadingFollowing(true);
     } catch (error) {
-      // console.log(`fetch following`, error);
+      console.log(`fetch following`, error);
     }
   };
 
   const handleFollow = async (idFollow: number) => {
     try {
-      const response = await axiosInstance.post(
-        `/user/follow?following=${idFollow}`
-      );
+      await axiosInstance.post(`/follow?following=${idFollow}`);
       fetchFollower();
       fetchFollowing();
       fetchSuggest();
       check();
-      console.log(`response handleFollow`, response);
     } catch (error) {
-      // console.log(`handle Follow`, error);
+      console.log(`handle Follow`, error);
     }
   };
 

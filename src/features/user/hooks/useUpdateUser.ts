@@ -57,17 +57,11 @@ export function useUpdateUser() {
     formData.append("username", form.username as string);
     formData.append("photo_profile", form.photo_profile as File);
     try {
-      const response = await axiosInstance.patch(`/user/${user.id}`, formData);
-      const response1 = await axiosInstance.patch(
-        `/user/photo-cover/${user.id}`,
-        cover
-      );
-      console.log(`form`, form);
+      await axiosInstance.patch(`/user/${user.id}`, formData);
+      await axiosInstance.patch(`/user/photo-cover/${user.id}`, cover);
       check();
-      console.log(response);
-      console.log(`response1`, response1);
     } catch (error) {
-      console.log(error);
+      console.log("error update user", error);
     }
   }
 
@@ -78,9 +72,8 @@ export function useUpdateUser() {
       const response = await axiosInstance.get("/check");
       dispatch(AUTH_CHECK(response.data.data));
       dispatchThread(getThread(user.id));
-      console.log(response);
     } catch (error) {
-      // console.log(error);
+      console.log("error check", error);
     }
   }
 

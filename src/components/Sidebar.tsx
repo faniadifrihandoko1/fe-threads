@@ -19,12 +19,15 @@ import {
 import { TbLogout2 } from "react-icons/tb";
 import logo from "../assets/logo.svg";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AUTH_LOGOUT } from "../store/rootRecuder";
+import { RootState } from "../store/type/RootState";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const username = useSelector((state: RootState) => state.auth.username);
 
   async function handleLogout() {
     dispatch(AUTH_LOGOUT());
@@ -111,7 +114,7 @@ export default function Sidebar() {
           </Box>
 
           <Box>
-            <NavLink to={"/profile"}>
+            <NavLink to={`/profile/${username}`}>
               {({ isActive }) => (
                 <Button alignItems="center" gap="3" bg="transparent">
                   {isActive ? (

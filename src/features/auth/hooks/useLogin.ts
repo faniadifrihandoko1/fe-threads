@@ -3,7 +3,6 @@ import { IUserLogin } from "../../../types/auth";
 import { axiosInstance } from "../../../lib/axios";
 import { useDispatch } from "react-redux";
 import { AUTH_LOGIN } from "../../../store/rootRecuder";
-
 import { useNavigate } from "react-router-dom";
 
 export function useLogin() {
@@ -31,8 +30,7 @@ export function useLogin() {
       navigate("/");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
-
+      console.log("error in login", error);
       setMessage(error.response.data.message);
     }
   }

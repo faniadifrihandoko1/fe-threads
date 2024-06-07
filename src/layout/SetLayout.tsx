@@ -1,9 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import Sidebar from "../components/Sidebar";
-import MyProfile from "../features/user/components/MyProfile";
+
 import CardFollow from "../features/suggestion/components/Suggestion";
 import Footer from "../components/Footer";
+import SideProfile from "../components/SideProfile";
 
 interface isLayoutProps {
   children: React.ReactNode;
@@ -39,7 +40,7 @@ export default function SetLayout({ children }: isLayoutProps) {
         </Box>
       </Box>
       <Box w="30%" display={{ base: "none", md: "block" }} px={4}>
-        <MyProfile />
+        <SideProfile />
         <CardFollow />
         <Footer />
       </Box>

@@ -21,7 +21,6 @@ function useThreads() {
   //  untuk mengambil input create thread
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
-    console.log("files", files);
     if (name === "image" && files && files.length > 0) {
       setData({
         ...data,
@@ -33,17 +32,6 @@ function useThreads() {
         [name]: value,
       });
     }
-    // if (files) {
-    //   setData({
-    //     ...data,
-    //     [name]: files[0],
-    //   });
-    // } else {
-    //   setData({
-    //     ...data,
-    //     [name]: value,
-    //   });
-    // }
   };
 
   // untuk mengirim thread
@@ -56,12 +44,10 @@ function useThreads() {
     formData.append("image", data.image as File);
 
     try {
-      // dispatch(createThread(formData));
-      const response = await axiosInstance.post("/thread", formData);
-      console.log(response);
+      await axiosInstance.post("/thread", formData);
       dispatch(getThread(userId));
     } catch (error) {
-      console.log(error);
+      console.log("error thread", error);
     }
   };
 
@@ -76,12 +62,10 @@ function useThreads() {
   // untuk like
   const handleLike = async (threadId: number) => {
     try {
-      const response = await axiosInstance.post(`/thread/like/${threadId}`);
-      console.log(`response like`, response);
-
+      await axiosInstance.post(`/thread/like/${threadId}`);
       dispatch(getThread(userId));
     } catch (error) {
-      console.log(error);
+      console.log("error like", error);
     }
   };
   return {

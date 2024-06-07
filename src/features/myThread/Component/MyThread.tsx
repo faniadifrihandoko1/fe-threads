@@ -13,15 +13,19 @@ import {
 
 import { IThread } from "../../../types/thread";
 import convertTimeToAgo from "../../../utils/convertTime";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaEllipsisH, FaRegHeart } from "react-icons/fa";
 import { BiMessageAltDetail } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
 import useMyThreads from "../hooks/useMyThread";
+import { useGetUser } from "../../user/hooks/useGetUser";
 
 export default function MyThread() {
-  const { handleDelete, handleModal, modals, mappedThread, isloading } =
-    useMyThreads();
+  const { username } = useParams();
+  const { handleDelete, handleModal, modals, mappedThread } =
+    useMyThreads(username);
+
+  const { isloading } = useGetUser(username);
 
   return (
     <>

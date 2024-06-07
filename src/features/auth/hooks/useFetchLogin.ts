@@ -11,7 +11,6 @@ export const useFetchLogin = ({ onError }: useFetchLoginProps) => {
     mutationFn: async (body: { email: string; password: string }) => {
       try {
         const response = await axiosInstance.post("/login", body);
-        console.log(response.data.token);
         localStorage.setItem("token", response.data.token);
         navigate("/");
         return response;
