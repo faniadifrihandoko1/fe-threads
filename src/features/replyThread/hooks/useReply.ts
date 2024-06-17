@@ -21,6 +21,15 @@ export default function useReply() {
     image: null,
   });
 
+  const handleLike = async (threadId: number) => {
+    try {
+      await axiosInstance.post(`/thread/like/${threadId}`);
+
+      dispatch(getThreadById({ threadId, userId }));
+    } catch (error) {
+      console.log("error like", error);
+    }
+  };
   useEffect(() => {
     dispatch(getThreadById({ threadId, userId }));
     dispatch(getThread(userId));
@@ -47,7 +56,7 @@ export default function useReply() {
     formData.append("image", data.image as File);
     try {
       await axiosInstance.post(`/thread/reply/${id}`, formData);
-      dispatch(getThread(userId));
+      dispatch(getThreadById({ threadId, userId }));
     } catch (error) {
       console.log("error reply", error);
     }
@@ -57,5 +66,6 @@ export default function useReply() {
     handleSubmit,
     dataThreadById,
     getThreadById,
+    handleLike,
   };
 }

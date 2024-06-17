@@ -10,7 +10,7 @@ import {
   Skeleton,
   Text,
 } from "@chakra-ui/react";
-import { BiMessageAltDetail } from "react-icons/bi";
+
 import { FaRegHeart } from "react-icons/fa";
 import convertTimeToAgo from "../../../utils/convertTime";
 import { IReply } from "../../../types/thread";
@@ -67,15 +67,6 @@ export default function ReplyThread({
                       />
                       <Text color="gray" fontSize={15} mb={"2px"}>
                         2
-                      </Text>
-                    </Flex>
-                  </Text>
-
-                  <Text bg="white" pt={"2px"}>
-                    <Flex gap={1} alignItems="center">
-                      <BiMessageAltDetail color="gray" size={20} />
-                      <Text color="gray" fontSize={15} mb={1}>
-                        100 Replies
                       </Text>
                     </Flex>
                   </Text>

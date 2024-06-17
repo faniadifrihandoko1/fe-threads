@@ -6,6 +6,7 @@ import { useUpdateUser } from "../../user/hooks/useUpdateUser";
 export default function useFollow() {
   const { check } = useUpdateUser();
   const { fetchSuggest } = useSuggestion();
+
   const [follower, setFollower] = useState([]);
   const [following, setFollowing] = useState([]);
   const [isloadingFollower, setIsloadingFollower] = useState(false);

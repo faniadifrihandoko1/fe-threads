@@ -25,8 +25,8 @@ export default function MyThread() {
   const { handleDelete, handleModal, modals, mappedThread } =
     useMyThreads(username);
 
-  const { isloading } = useGetUser(username);
-
+  const { isloading, isUserLogin } = useGetUser(username);
+  const isUser = isUserLogin();
   return (
     <>
       {mappedThread.map((item: IThread, key: number) => (
@@ -35,7 +35,10 @@ export default function MyThread() {
             <Box>
               <Flex gap={4}>
                 <Box>
-                  <Avatar name="Dan Abrahmov" src={item.user?.photo_profile} />
+                  <Avatar
+                    name={item.user?.fullName}
+                    src={item.user?.photo_profile}
+                  />
                 </Box>
                 <Box>
                   {item.user?.fullName ? (
@@ -64,10 +67,17 @@ export default function MyThread() {
                       {convertTimeToAgo(item.created_at)}
                     </Text>
                   </Flex>
-                  <Link to={`detail-status/${item.id}`}>
+                  <Link to={`/detail-status/${item.id}`}>
                     <Text fontSize={15}>{item.content}</Text>
                   </Link>
-                  {!!item.image && <Image src={item.image}></Image>}
+                  {!!item.image && (
+                    <Image
+                      mt={"5px"}
+                      borderRadius={"10px"}
+                      maxH={"500px"}
+                      src={item.image}
+                    ></Image>
+                  )}
                   <Flex gap={2} mt={2} alignItems="center">
                     <Button
                       // onClick={handleLike}
@@ -98,9 +108,11 @@ export default function MyThread() {
                     </Link>
                   </Flex>
                 </Box>
-                <Box ml="auto" mr={4}>
-                  <FaEllipsisH onClick={() => handleModal(item.id)} />
-                </Box>
+                {isUser && (
+                  <Box ml="auto" cursor={"pointer"} mr={4}>
+                    <FaEllipsisH onClick={() => handleModal(item.id)} />
+                  </Box>
+                )}
                 {modals[item.id] && (
                   <Box
                     position={"absolute"}

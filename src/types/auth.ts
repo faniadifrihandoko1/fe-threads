@@ -20,6 +20,7 @@ export interface IUser {
   bio?: string;
   exp?: number;
   iat?: number;
+  is_following?: boolean;
   password?: string;
   following?: IUser[];
   follower?: IUser[];

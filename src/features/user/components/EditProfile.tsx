@@ -1,22 +1,19 @@
 import { Box, Button, Card, Flex, Image, Input, Text } from "@chakra-ui/react";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { NavLink } from "react-router-dom";
 import { useUpdateUser } from "../hooks/useUpdateUser";
 import { TiPencil } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile: React.FC = () => {
   const { handleChange, handleSubmit, form } = useUpdateUser();
-
-  // const [showInput, setShowInput] = useState(false);
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   return (
     <>
       <Card pt={4} mt={2}>
         <Flex alignItems={"center"} gap={2} ml={4}>
-          <NavLink to={"/"}>
-            <IoMdArrowRoundBack />
-          </NavLink>
+          <IoMdArrowRoundBack cursor={"pointer"} onClick={() => navigate(-1)} />
 
           <Text my={1} fontSize={18} fontWeight="bold">
             Edit Profile

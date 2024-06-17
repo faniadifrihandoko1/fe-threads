@@ -28,7 +28,7 @@ const CardFollow: React.FC = () => {
           <Skeleton isLoaded={isloading}>
             <Flex justify="space-between">
               <Flex gap={2} alignItems="center">
-                <Avatar name="Dan Abrahmov" src={item.photo_profile} />
+                <Avatar name={item.fullName} src={item.photo_profile} />
                 <Box>
                   <Text>{item.fullName}</Text>
                   <Text color="gray" mt={-1}>

@@ -42,7 +42,7 @@ export default function useSearch() {
   const handleFollow = async (idFollow: number) => {
     try {
       const response = await axiosInstance.post(
-        `/user/follow?following=${idFollow}`
+        `/follow?following=${idFollow}`
       );
       fetchUsers();
       console.log(response);
@@ -65,5 +65,6 @@ export default function useSearch() {
     handleSearch,
     users,
     handleFollow,
+    fetchUsers,
   };
 }

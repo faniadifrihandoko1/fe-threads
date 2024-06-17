@@ -21,7 +21,7 @@ const MyProfile: React.FC<userProps> = () => {
   const mainText = useColorModeValue("gray.800", "white");
   const user = useSelector((state: RootState) => state.auth.username);
   const { username } = useParams();
-  const { users, isloading } = useGetUser(username);
+  const { users, isloading, handleFollow } = useGetUser(username);
 
   return (
     <Skeleton isLoaded={isloading}>
@@ -85,8 +85,11 @@ const MyProfile: React.FC<userProps> = () => {
                   my="5px"
                   h="30px"
                   rounded="16px"
+                  onClick={() =>
+                    users?.id !== undefined && handleFollow(users.id)
+                  }
                 >
-                  Follow
+                  {users?.is_following ? "Unfollow" : "Follow"}
                 </Button>
               )}
             </Box>

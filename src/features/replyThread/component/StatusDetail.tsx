@@ -14,7 +14,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 import { BiMessageAltDetail } from "react-icons/bi";
 // import data from "../utils/data";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import convertISOToReadableTime from "../../../utils/convertTimeHours";
 import convertDateFormat from "../../../utils/convertDate";
@@ -27,17 +27,15 @@ import { useAppSelector } from "../../../store/type/RootState";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const StatusDetail = () => {
   const { id } = useParams();
-  const { dataThreadById } = useReply();
+  const { dataThreadById, handleLike } = useReply();
   const isLoad = useAppSelector((state) => state.threadById.isLoading);
-
+  const navigate = useNavigate();
   return (
     <>
       {/* <Skeleton isLoaded={isLoad}> */}
       <Card p={4} my={2}>
         <Flex alignItems={"center"} gap={2}>
-          <NavLink to={"/"}>
-            <IoMdArrowRoundBack />
-          </NavLink>
+          <IoMdArrowRoundBack cursor={"pointer"} onClick={() => navigate(-1)} />
 
           <Text my={1} fontSize={18} fontWeight="bold">
             Status
@@ -109,10 +107,11 @@ const StatusDetail = () => {
                   >
                     <Flex gap={1} alignItems="center">
                       <FaRegHeart
-                        // onClick={() => {
-                        //   handleLike(item.id);
-                        // }}
-                        // color={item.isLiked ? "red" : "gray"}
+                        onClick={() => {
+                          handleLike(dataThreadById?.id);
+                        }}
+                        cursor="pointer"
+                        color={dataThreadById?.isLiked ? "red" : "gray"}
                         size={18}
                       />
                       <Text color="gray" fontSize={15} mb={"2px"}>

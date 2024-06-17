@@ -30,7 +30,10 @@ const CardPost: React.FC = () => {
           <Box>
             <Flex gap={4}>
               <Box>
-                <Avatar name="Dan Abrahmov" src={item.user?.photo_profile} />
+                <Avatar
+                  name={item.user?.fullName}
+                  src={item.user?.photo_profile}
+                />
               </Box>
               <Box>
                 <Link to={`profile/${item.user?.username}`}>
@@ -59,6 +62,7 @@ const CardPost: React.FC = () => {
                     <Image
                       mt={"5px"}
                       borderRadius={"10px"}
+                      maxH={"500px"}
                       src={item.image}
                     ></Image>
                   )}
